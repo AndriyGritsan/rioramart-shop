@@ -1,0 +1,332 @@
+{% extends "core/base.html" %}
+{% load  static %}
+{% block content %}
+
+ 
+ 
+    <!-- breadcrumbs -->
+      <nav class="container mt-4 mt-sm-4 mt-md-4 mt-lg-3 d-flex flex-wrap align-items-center gap-2 px-3">
+        <div class="d-flex align-items-center gap-2">
+          <a href="index.html">
+            <svg class="text-primary" stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 576 512" height="20px" width="20px" xmlns="http://www.w3.org/2000/svg">
+              <path d="M280.37 148.26L96 300.11V464a16 16 0 0 0 16 16l112.06-.29a16 16 0 0 0 15.92-16V368a16 16 0 0 1 16-16h64a16 16 0 0 1 16 16v95.64a16 16 0 0 0 16 16.05L464 480a16 16 0 0 0 16-16V300L295.67 148.26a12.19 12.19 0 0 0-15.3 0zM571.6 251.47L488 182.56V44.05a12 12 0 0 0-12-12h-56a12 12 0 0 0-12 12v72.61L318.47 43a48 48 0 0 0-61 0L4.34 251.47a12 12 0 0 0-1.6 16.9l25.5 31A12 12 0 0 0 45.15 301l235.22-193.74a12.19 12.19 0 0 1 15.3 0L530.9 301a12 12 0 0 0 16.9-1.6l25.5-31a12 12 0 0 0-1.7-16.93z"></path>
+            </svg>
+          </a>
+          <svg stroke="currentColor" fill="none" stroke-width="2" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round" class="text-muted ml-2" height="18px" width="18px" xmlns="http://www.w3.org/2000/svg">
+            <polyline points="9 18 15 12 9 6"></polyline>
+          </svg>
+        </div>
+        <div class="d-flex align-items-center gap-2 ml-1">
+          <a class="text-muted text-decoration-none pointer-events-none" href="#">Checkout</a>
+        </div>
+      </nav>
+    <!-- end breadcrumbs -->
+    <section class="checkout-section">
+      <div class="container mt-50 px-4">
+            <form action="#" method="Post" >
+                        {% csrf_token %}
+                        <div class="row mt-50">
+                            <div class="col-lg-8">
+                                <div class="row">
+                                    <div class="col-lg-12">
+                                        <h4 class="title-2 mb-4">Billing Details</h4>
+                                        <div class="checkout-info">
+
+                                            <h6>Personal Information</h6>
+                                            <div class="row">
+                                                <div class="col-md-6 mb-4">
+                                                    {{ order_form.first_name }}
+                                                </div>
+                                                <div class="col-md-6 mb-4">
+                                                    {{ order_form.last_name }}
+                                                </div>
+                                                <div class="col-md-6 mb-4">
+                                                    {{ order_form.email }}
+                                                </div>
+                                                <div class="col-md-6 mb-4">
+                                                    {{ order_form.phone }}
+                                                </div>
+                                                <div class="col-md-6 mb-4">
+                                                    {{ order_form.company_name }}
+                                                </div>
+                                                <div class="col-md-6 mb-4">
+                                                    {{ order_form.company_address }}
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-lg-12 col-md-12 mb-4">
+                                                    <h6>Country</h6>
+                                                    <div class="input-item gs_input_area">
+                                                        <select name="country">
+                                                            <option value="">Select your Country</option>
+                                                            <option>United Kingdom (UK)</option>
+                                                            <option>United States (US)</option>
+                                                            <option>Bangladesh</option>
+                                                            <option>Select Country</option>
+                                                            <option>Australia</option>
+                                                            <option>Canada</option>
+                                                            <option>China</option>
+                                                            <option>Morocco</option>
+                                                            <option>Saudi Arabia</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-12 col-md-12">
+                                                    <h6>Address</h6>
+                                                    <div class="row">
+                                                        <div class="col-md-6 mb-4">
+                                                            {{ order_form.billing_address_line1 }}
+                                                        </div>
+                                                        <div class="col-md-6 mb-4">
+                                                            {{ order_form.billing_address_line2 }}
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-4 col-md-6 mb-4">
+                                                    <h6>Town / City</h6>
+                                                    {{ order_form.city }}
+                                                </div>
+                                                <div class="col-lg-4 col-md-6 mb-4">
+                                                    <h6>State </h6>
+                                                    {{ order_form.state }}
+                                                </div>
+                                                <div class="col-lg-4 col-md-6 mb-4">
+                                                    <h6>Zip</h6>
+                                                    {{ order_form.zip_code }}
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group d-flex align-items-center justify-content-between px-3">
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" value="" id="sameShippingAddress" required="">
+                                            <label class="form-check-label form-label" for="sameShippingAddress">
+                                                The shipping address is the same as the billing address.
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-12 shipping-details">
+                                        <h4 class="title-2 mb-4">Shipping Details</h4>
+                                        <div class="checkout-info">
+                                            <h6>Personal Information</h6>
+                                            <div class="row">
+                                                <div class="col-md-6 mb-4">
+                                                    {{ order_form.shopping_first_name }}
+                                                </div>
+                                                <div class="col-md-6 mb-4">
+                                                    {{ order_form.shopping_last_name }}
+                                                </div>
+                                                <div class="col-md-6 mb-4">
+                                                    {{ order_form.shopping_email }}
+                                                </div>
+                                                <div class="col-md-6 mb-4">
+                                                    {{ order_form.shopping_phone }}
+                                                </div>
+                                                <div class="col-md-6 mb-4">
+                                                    {{ order_form.shopping_company }}
+                                                </div>
+                                                <div class="col-md-6 mb-4">
+                                                    <div class="input-item input-item-website gs_input_area">
+                                                        {{ order_form.shopping_address }}
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-lg-12 col-md-12 mb-4">
+                                                    <h6>Country</h6>
+                                                    <div class="input-item gs_input_area w-100">
+                                                        <select name="shopping_country">
+                                                            <option value="">Select your Country</option>
+                                                            <option>United Kingdom (UK)</option>
+                                                            <option>United States (US)</option>
+                                                            <option>Bangladesh</option>
+                                                            <option>Select Country</option>
+                                                            <option>Australia</option>
+                                                            <option>Canada</option>
+                                                            <option>China</option>
+                                                            <option>Morocco</option>
+                                                            <option>Saudi Arabia</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-12 col-md-12">
+                                                    <h6>Address</h6>
+                                                    <div class="row">
+                                                        <div class="col-md-6 mb-4">
+                                                            {{ order_form.shopping_address_line1 }}
+                                                        </div>
+                                                        <div class="col-md-6 mb-4">
+                                                            {{ order_form.shopping_address_line2 }}
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-4 col-md-6 mb-4">
+                                                    <h6>Town / City</h6>
+                                                    {{ order_form.shopping_city }}
+                                                </div>
+                                                <div class="col-lg-4 col-md-6 mb-4">
+                                                    <h6>State </h6>
+                                                    {{ order_form.shopping_state }}
+                                                </div>
+                                                <div class="col-lg-4 col-md-6 mb-4">
+                                                    <h6>Zip</h6>
+                                                    {{ order_form.shopping_zip_code }}
+                                                </div>
+                                            </div>
+
+
+                                        </div>
+                                    </div>
+                                    <h6>Order Notes (optional)</h6>
+                                    <div class="input-item input-item-textarea gs_input_area">
+                                        <textarea name="gs_message" rows="4" placeholder="Notes about your order, e.g. Special notes for Delivery:" required=""></textarea>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="col-lg-4 mt-5">
+                                <div class="card bg-white">
+                                    <div class="card-header bg-white px-4">
+                                        <h2>Your Order</h2>
+                                    </div>
+                                    <div class="card-body p-0">
+                                        <div class="d-flex justify-content-between px-4 py-3">
+                                            <span class="p-summary-price">Subtotal</span>
+                                            <span class="p-summary-title">{{ subtotal }}</span>
+                                        </div>
+                                        <div class="d-flex justify-content-between  border-t">
+                                            <span class="p-summary-title">Delivery Charges</span>
+                                            <span class="p-summary-price">{{ delivery }}</span>
+                                        </div>
+                                        <div class="d-flex justify-content-between mt-2 border-t">
+                                            <span class="p-summary-total-title">Total Amount</span>
+                                            <span class="p-summary-total-price">{{ total }}</span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="card mt-4">
+                                    <div class="card-header bg-white px-4">
+                                        <h2>Payment Method</h2>
+                                    </div>
+                                    <div class="border-top border-width-3 border-color-1 pt-3 mb-3">
+                                        <!-- Basics Accordion -->
+
+                                        <!-- Card -->
+                                        <div class="accordion" id="basicsAccordion1">
+                                            <div class="border-bottom border-color-1 border-dotted-bottom">
+                                                <div class="p-3" id="basicsHeadingFour">
+                                                    <div class="custom-control custom-radio">
+                                                        <input type="radio" class="custom-control-input" id="FourstylishRadio1" name="stylishRadio">
+                                                        <label class="custom-control-label form-label" for="FourstylishRadio1" data-bs-toggle="collapse" data-bs-target="#basicsCollapseOne" aria-expanded="true" aria-controls="basicsCollapseOne">
+                                                            Direct bank transfer
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                                <div id="basicsCollapseOne" class="accordion-collapse collapse" aria-labelledby="basicsHeadingFour" data-bs-parent="#basicsAccordion1">
+                                                    <div class="px-4 py-2">
+                                                        Make your payment directly into our bank account. Please use
+                                                        your Order ID as the payment reference. Your order will not be
+                                                        shipped until the funds have cleared in our account.
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- End Card -->
+
+                                        <!-- Card -->
+                                        <div class="accordion" id="basicsAccordion2">
+                                            <div class="border-bottom border-color-1 border-dotted-bottom">
+                                                <div class="p-3" id="basicsHeadingFour">
+                                                    <div class="custom-control custom-radio">
+                                                        <input type="radio" class="custom-control-input" id="FourstylishRadio2" name="stylishRadio">
+                                                        <label class="custom-control-label form-label" for="FourstylishRadio2" data-bs-toggle="collapse" data-bs-target="#basicsCollapseTwo" aria-expanded="true" aria-controls="basicsCollapseTwo">
+                                                            Check payments
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                                <div id="basicsCollapseTwo" class="accordion-collapse collapse" aria-labelledby="basicsHeadingFour" data-bs-parent="#basicsAccordion2">
+                                                    <div class="px-4 py-2">
+                                                        Please send a check to Store Name, Store Street, Store Town,
+                                                        Store State / County, Store Postcode.
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- End Card -->
+
+                                        <!-- Card -->
+                                        <div class="accordion" id="basicsAccordion3">
+                                            <div class="border-bottom border-color-1 border-dotted-bottom">
+                                                <div class="p-3" id="basicsHeadingFour">
+                                                    <div class="custom-control custom-radio">
+                                                        <input type="radio" class="custom-control-input" id="FourstylishRadio3" name="stylishRadio">
+                                                        <label class="custom-control-label form-label" for="FourstylishRadio3" data-bs-toggle="collapse" data-bs-target="#basicsCollapseThree" aria-expanded="true" aria-controls="basicsCollapseThree">
+                                                            Cash on delivery
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                                <div id="basicsCollapseThree" class="accordion-collapse collapse" aria-labelledby="basicsHeadingFour" data-bs-parent="#basicsAccordion3">
+                                                    <div class="px-4 py-2">
+                                                        Pay with cash upon delivery.
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- End Card -->
+
+                                        <!-- Card -->
+                                        <div class="accordion" id="basicsAccordion4">
+                                            <div class="border-bottom border-color-1 border-dotted-bottom">
+                                                <div class="p-3" id="basicsHeadingFour">
+                                                    <div class="custom-control custom-radio">
+                                                        <input type="radio" class="custom-control-input" id="FourstylishRadio4" name="stylishRadio">
+                                                        <label class="custom-control-label form-label" for="FourstylishRadio4" data-bs-toggle="collapse" data-bs-target="#basicsCollapseFour" aria-expanded="true" aria-controls="basicsCollapseFour">
+                                                            PayPal <a href="#" class="text-blue">What is PayPal?</a>
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                                <div id="basicsCollapseFour" class="accordion-collapse collapse" aria-labelledby="basicsHeadingFour" data-bs-parent="#basicsAccordion4">
+                                                    <div class="px-4 py-2">
+                                                        Pay via PayPal; you can pay with your credit card if you don’t
+                                                        have a PayPal account.
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- End Card -->
+                                        <!-- End Basics Accordion -->
+                                    </div>
+                                    <div class="form-group d-flex align-items-center justify-content-between px-3">
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" value="" id="defaultCheck10" required="" data-msg="Please agree terms and conditions." data-error-class="u-has-error" data-success-class="u-has-success">
+                                            <label class="form-check-label form-label" for="defaultCheck10">
+                                                I have read and agree to the website <a href="#" class="text-blue">terms
+                                                    and conditions </a>
+                                                <span class="text-danger">*</span>
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="checkout-btn mx-3 my-4">
+                                        <a href="checkout.html" class="btn btn-primary btn-lg w-100">Place Order</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+      </div>
+    </section>
+
+{% endblock %}
+
+
+
+
+
+
+
+
+
+
+
+

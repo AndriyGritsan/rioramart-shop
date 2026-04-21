@@ -1,0 +1,96 @@
+{% extends "core/base.html" %}
+{% load static %}
+{% block content %}
+
+
+    <!-- breadcrumbs -->
+      <nav class="container mt-4 mt-sm-4 mt-md-4 mt-lg-3 d-flex flex-wrap align-items-center gap-2 px-3">
+        <div class="d-flex align-items-center gap-2">
+          <a href="{% url 'home' %}">
+            <svg class="text-primary" stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 576 512" height="20px" width="20px" xmlns="http://www.w3.org/2000/svg">
+              <path d="M280.37 148.26L96 300.11V464a16 16 0 0 0 16 16l112.06-.29a16 16 0 0 0 15.92-16V368a16 16 0 0 1 16-16h64a16 16 0 0 1 16 16v95.64a16 16 0 0 0 16 16.05L464 480a16 16 0 0 0 16-16V300L295.67 148.26a12.19 12.19 0 0 0-15.3 0zM571.6 251.47L488 182.56V44.05a12 12 0 0 0-12-12h-56a12 12 0 0 0-12 12v72.61L318.47 43a48 48 0 0 0-61 0L4.34 251.47a12 12 0 0 0-1.6 16.9l25.5 31A12 12 0 0 0 45.15 301l235.22-193.74a12.19 12.19 0 0 1 15.3 0L530.9 301a12 12 0 0 0 16.9-1.6l25.5-31a12 12 0 0 0-1.7-16.93z"></path>
+            </svg>
+          </a>
+          <svg stroke="currentColor" fill="none" stroke-width="2" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round" class="text-muted ml-2" height="18px" width="18px" xmlns="http://www.w3.org/2000/svg">
+            <polyline points="9 18 15 12 9 6"></polyline>
+          </svg>
+        </div>
+        <div class="d-flex align-items-center gap-2 ml-1">
+          <a class="text-muted text-decoration-none pointer-events-none" href="#">Cart</a>
+        </div>
+      </nav>
+    <!-- end breadcrumbs -->
+     
+    <section class="cart-section px-3">
+      <div class="container mt-50 px-4">
+        <div class="mb-6 row">
+          <div class="col-12 col-lg-7 mb-4 mb-lg-0">
+            <div class="mb-4 row d-none d-sm-none d-md-none d-lg-block">
+                <div class="col-lg-12">
+                        <div class="row"> 
+                          <div class="col-lg-4">
+                            <b>Product</b>
+                          </div>
+                          <div class="col-lg-2">
+                            <b>Price</b>
+                          </div>
+                          <div class="col-lg-3">
+                            <b>Quantity</b>
+                          </div>
+                          <div class="col-lg-3">
+                            <b>Total</b>
+                          </div>
+                        </div>
+                </div>
+            </div>
+            <div class="products mt-3">
+              <!-- Product 1 -->
+               {% for item in items %}
+              <div class="position-relative product-item row mb-4 rounded-lg bg-white pt-3 shadow-sm mr-1">
+                <div class="col-12 col-sm-6 col-lg-4 mb-3 mb-sm-3 mb-md-3 md-lg-0">
+                  <b class="mb-2 d-block d-xl-none">{{ item.product.name }}</b>
+                  <div class=" d-flex w-100">
+                    <figure class="rounded-lg">
+                      <img  src="{{ item.product.photo.url }}" class="rounded" width="60" alt="img">
+                    </figure>
+                    <div class="ml-2 w-100">
+                      <a class="font-weight-bold text-dark" href="#" >
+                        {{ item.product.name }}.
+                      </a>
+                      <div class="mt-2">
+                        <small>#PRD36585</small>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-12 col-sm-6 col-lg-2 mb-3 mb-sm-3 mb-md-3 md-lg-0">
+                  <b class="mb-2 d-block d-xl-none"></b>
+                  <div>
+                    <span class="font-weight-bold text-primary">{{ item.total }}</span>
+                  </div>
+                </div>
+                <div class="col-12 col-sm-6 col-lg-3 mb-3 mb-sm-3 mb-md-3 md-lg-0">
+                  <b class="mb-2 d-block d-xl-none">{{ item.quantity }}</b>
+                  <div class="qty-container">
+                    <button class="qty-btn-minus count-decreament" type="button"><i class="fas fa-minus"></i></button>
+                    <input type="number" name="qty" value="{{ item.quantity }}" class="input-qty input-cornered">
+                    <button class="qty-btn-plus count-increament" type="button"><i class="fas fa-plus"></i></button>
+                </div>
+                </div>
+                <div class="col-12 col-sm-6 col-lg-3 mb-3 mb-sm-3 mb-md-3 md-lg-0">
+                  <b class="mb-2 d-block d-xl-none">{{ item.total}}</b>
+                  <span class="font-weight-bold text-primary">{{ item.product.price }}</span>
+                </div>
+                <button class="btn btn-primary position-absolute close-cart">
+                  <svg  stroke="currentColor" fill="none" stroke-width="2" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round" height="20px" width="20px" xmlns="http://www.w3.org/2000/svg">
+                      <line x1="18" y1="6" x2="6" y2="18"></line>
+                      <line x1="6" y1="6" x2="18" y2="18"></line>
+                  </svg>
+              </button>
+              </div>
+               {% endfor %}
+        </div>
+      </div>
+    </section>
+
+{% endblock %}    

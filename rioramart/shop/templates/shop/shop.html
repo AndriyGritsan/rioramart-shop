@@ -1,0 +1,266 @@
+{% extends "core/base.html" %}
+{% load static %}
+{% block content %}
+
+ 
+
+        <!-- breadcrumbs -->
+      <nav class="container mt-4 mt-sm-4 mt-md-4 mt-lg-3 d-flex flex-wrap align-items-center gap-2 px-3">
+        <div class="d-flex align-items-center gap-2">
+          <a href="index.html">
+            <svg class="text-primary" stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 576 512" height="20px" width="20px" xmlns="http://www.w3.org/2000/svg">
+              <path d="M280.37 148.26L96 300.11V464a16 16 0 0 0 16 16l112.06-.29a16 16 0 0 0 15.92-16V368a16 16 0 0 1 16-16h64a16 16 0 0 1 16 16v95.64a16 16 0 0 0 16 16.05L464 480a16 16 0 0 0 16-16V300L295.67 148.26a12.19 12.19 0 0 0-15.3 0zM571.6 251.47L488 182.56V44.05a12 12 0 0 0-12-12h-56a12 12 0 0 0-12 12v72.61L318.47 43a48 48 0 0 0-61 0L4.34 251.47a12 12 0 0 0-1.6 16.9l25.5 31A12 12 0 0 0 45.15 301l235.22-193.74a12.19 12.19 0 0 1 15.3 0L530.9 301a12 12 0 0 0 16.9-1.6l25.5-31a12 12 0 0 0-1.7-16.93z"></path>
+            </svg>
+          </a>
+          <svg stroke="currentColor" fill="none" stroke-width="2" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round" class="text-muted ml-2" height="18px" width="18px" xmlns="http://www.w3.org/2000/svg">
+            <polyline points="9 18 15 12 9 6"></polyline>
+          </svg>
+        </div>
+        <div class="d-flex align-items-center gap-2 ml-1">
+          <a class="text-muted text-decoration-none pointer-events-none" href="#">Shop</a>
+        </div>
+      </nav>
+    <!-- end breadcrumbs -->
+    <div class="shop-section">
+        <!-- section -->
+        <div class="mb-5 mt-50">
+           <!-- container -->
+           <div class="container">
+              <!-- row -->
+              <div class="row gx-10">
+                 <!-- col -->
+                  <div class="col-lg-3 col-md-4 mb-2 order-2 order-sm-2 order-md-2 order-lg-1">
+                      <aside class="offcanvas-lg offcanvas-start" tabindex="-1" id="filter-section" aria-labelledby="navbar-defaultLabel">
+                          <div class="offcanvas-header d-lg-none">
+                              <h2 class="fw-semibold fs-3">Filter</h2>
+                              <button type="button" class="btn-close" id="filter-section-close"></button>
+                          </div>
+                          <div class="offcanvas-body p-lg-0">
+                               <div class="flex-grow-1">
+                                 <div class="mb-4 border-bottom pb-3 filter-box-item">
+                                  <p class="mb-3 filter-title">Category</p>
+                                  <hr>
+                                  <div class="mt-4 filter-category">
+                                      <ul class="list-unstyled">
+                                        {% for category in categories %}
+                                          <li><a href="?category={{ category.id }}">{{ category.name }}
+
+                                          </a>
+                                          <span class="p-count">({{ category.products.count }})
+                                          </span>
+                                        </li>
+                                        {% endfor %}
+                                      </ul>
+                                  </div>
+                              </div>
+                              <div class="mb-4 border-bottom pb-3 filter-box-item">
+                                  <p class="mb-3 filter-title">Filter by price</p>
+                                  <hr>
+                                  <div class="mt-4">
+                                      <div id="priceRange" class="mb-4"></div>
+                                      <small class="text-muted">Price:</small>
+                                      <span id="priceRange-value" class="small"></span>
+                                  </div>
+                              </div>
+      
+                              <div class="mb-4 border-bottom pb-3 filter-box-item">
+                                  <!-- Color -->
+                                  <p class="mb-3 filter-title">Color</p>
+                                  <hr>
+                                  <div class="mt-4">
+                                      <div class="form-check mb-2 d-flex justify-content-between">
+                                          <div>
+                                              <input class="form-check-input" type="checkbox" value="" id="tRed" checked>
+                                              <label class="form-check-label" for="tRed">Red</label>
+                                          </div>
+                                          <span class="p-count">(5)</span>
+                                      </div>
+                                      <div class="form-check mb-2 d-flex justify-content-between">
+                                          <div>
+                                              <input class="form-check-input" type="checkbox" value="" id="tBlue">
+                                              <label class="form-check-label" for="tBlue">Blue</label>
+                                          </div>
+                                          <span class="p-count">(2)</span>
+                                      </div>
+                                      <div class="form-check mb-2 d-flex justify-content-between">
+                                          <div>
+                                              <input class="form-check-input" type="checkbox" value="" id="tBlack">
+                                              <label class="form-check-label" for="tBlack">Black</label>
+                                          </div>
+                                          <span class="p-count">(2)</span>
+                                      </div>
+                                  </div>
+                              </div>
+      
+                              <div class="mb-4 border-bottom pb-3 filter-box-item">
+                                  <!-- Size -->
+                                  <p class="mb-3 filter-title">Size</p>
+                                  <hr>
+                                  <div class="mt-4">
+                                  <div class="form-check mb-2 d-flex justify-content-between">
+                                      <div>
+                                          <input class="form-check-input" type="checkbox" value="" id="tSmall" checked>
+                                          <label class="form-check-label" for="tSmall">Small</label>
+                                      </div>
+                                      <span class="p-count">(2)</span>
+                                  </div>
+                                  <div class="form-check mb-2 d-flex justify-content-between">
+                                      <div>
+                                          <input class="form-check-input" type="checkbox" value="Medium" id="tMedium">
+                                          <label class="form-check-label" for="tMedium">Medium</label>
+                                      </div>
+                                      <span class="p-count">(2)</span>
+                                  </div>
+                                  <div class="form-check mb-2 d-flex justify-content-between">
+                                      <div>
+                                          <input class="form-check-input" type="checkbox" value="Large" id="tLarge">
+                                          <label class="form-check-label" for="tLarge">Large</label>
+                                      </div>
+                                      <span class="p-count">(2)</span>
+                                  </div>
+                                  </div>
+                              </div>
+                              <div class="mb-4 border-bottom pb-3 filter-box-item">
+                                  <!-- Rating -->
+                                  <p class="mb-3 filter-title">Rating</p>
+                                  <hr>
+                                  <div class="mt-4">
+                                      <div class="form-check mb-2 d-flex justify-content-between">
+                                          <div>
+                                              <input class="form-check-input" type="checkbox" value="" id="rating5">
+                                              <label class="form-check-label" for="rating5">
+                                              <i class="fas fa-star text-warning"></i>
+                                              <i class="fas fa-star text-warning"></i>
+                                              <i class="fas fa-star text-warning"></i>
+                                              <i class="fas fa-star text-warning"></i>
+                                              <i class="fas fa-star text-warning"></i>
+                                              </label>
+                                          </div>
+                                          <span class="p-count">(2)</span>
+                                      </div>
+                                      <div class="form-check mb-2 d-flex justify-content-between">
+                                          <div>
+                                              <input class="form-check-input" type="checkbox" value="" id="rating4">
+                                              <label class="form-check-label" for="rating4">
+                                              <i class="fas fa-star text-warning"></i>
+                                              <i class="fas fa-star text-warning"></i>
+                                              <i class="fas fa-star text-warning"></i>
+                                              <i class="fas fa-star text-warning"></i>
+                                              <i class="far fa-star text-warning"></i>
+                                              </label>
+                                          </div>
+                                          <span class="p-count">(2)</span>
+                                      </div>
+                                      <div class="form-check mb-2 d-flex justify-content-between">
+                                          <div>
+                                              <input class="form-check-input" type="checkbox" value="" id="rating3">
+                                              <label class="form-check-label" for="rating3">
+                                              <i class="fas fa-star text-warning"></i>
+                                              <i class="fas fa-star text-warning"></i>
+                                              <i class="fas fa-star text-warning"></i>
+                                              <i class="far fa-star text-warning"></i>
+                                              <i class="far fa-star text-warning"></i>
+                                              </label>
+                                          </div>
+                                          <span class="p-count">(2)</span>
+                                      </div>
+                                      <div class="form-check mb-2 d-flex justify-content-between">
+                                          <div>
+                                              <input class="form-check-input" type="checkbox" value="" id="rating2">
+                                              <label class="form-check-label" for="rating2">
+                                              <i class="fas fa-star text-warning"></i>
+                                              <i class="fas fa-star text-warning"></i>
+                                              <i class="far fa-star text-warning"></i>
+                                              <i class="far fa-star text-warning"></i>
+                                              <i class="far fa-star text-warning"></i>
+                                              </label>
+                                          </div>
+                                          <span class="p-count">(2)</span>
+                                      </div>
+                                      <div class="form-check mb-2 d-flex justify-content-between">
+                                          <div>
+                                              <input class="form-check-input" type="checkbox" value="" id="ratingOne">
+                                              <label class="form-check-label" for="ratingOne">
+                                              <i class="fas fa-star text-warning"></i>
+                                              <i class="far fa-star text-warning"></i>
+                                              <i class="far fa-star text-warning"></i>
+                                              <i class="far fa-star text-warning"></i>
+                                              <i class="far fa-star text-warning"></i>
+                                              </label>
+                                          </div>
+                                          <span class="p-count">(2)</span>
+                                      </div>
+                                  </div>
+                              </div>
+                               </div>
+                          </div>
+                      </aside>
+                  </div>
+
+                 <section class="col-lg-9 col-md-12 order-1 order-sm-1 order-md-1 order-lg-2">
+                       <div class="d-flex flex-column flex-md-row justify-content-between align-items-center mt-2">
+                            <div class="mb-3 mb-md-0">
+                                <p class="mb-0">There are 100 products</p>
+                            </div>
+                            <div class="d-flex align-items-center">
+                                <div class="d-lg-none me-2">
+                                    <a class="btn border px-4 text-muted" type="button" data-bs-toggle="offcanvas" data-bs-target="#filter-section" aria-controls="filter-section" aria-label="Toggle navigation">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-filter me-2">
+                                            <polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"></polygon>
+                                        </svg>
+                                        <span class="d-none d-md-inline-block d-lg-inline-block">Filters</span>
+                                    </a>
+                                </div>
+                                <div class="d-flex align-items-center">
+                                    <label for="sortSelect" class="me-2 mb-0" style="white-space: nowrap;">Sort by:</label>
+                                    <select class="form-select w-auto" id="sortSelect">
+                                        <option value="popular">Popularity</option>
+                                        <option value="price-low">Price: Low to High</option>
+                                        <option value="price-high">Price: High to Low</option>
+                                        <option value="newest">Newest First</option>
+                                        <option value="rating">Customer Rating</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="product mt-4">
+                            <div class="row row-cols-xl-3 row-cols-lg-3 row-cols-2 row-cols-md-2 mt-1">
+                                {% for product in products %}
+                                <div class="col mb-3">
+                                    <div class="product-card">
+                                    {% if not product.available %}
+                                        <span class="badge-new bg-danger">Out of stock</span>
+                                    {% endif %}
+                                    <span class="wishlist-icon"><i class="fas fa-heart"></i></span>
+                                    <a href="{% url 'shop_single' %}">
+                                        <img src="{{ product.photo.url }}" class="img-fluid mb-2 product-img" alt="product">
+                                    </a>
+                                    <h6><a href="{% url 'shop_single' product.id %}">{{ product.name }}</a></h6>
+                                    <div class="rating">
+                                        <span class="d-flex align-items-center">
+                                            <span class="star-icon text-warning">★</span>
+                                            <span class="star-icon text-warning">★</span>
+                                            <span class="star-icon text-warning">★</span>
+                                            <span class="star-icon text-warning">★</span>
+                                            <span class="star-icon text-warning">★</span>
+                                        </span>
+                                    </div>
+                                    <div>
+                                        {% if product.old_price %}
+                                            <span class="old-price">{{ product.old_price }}</span>
+                                        {% endif %}
+                                        <span class="price">{{ product.price }}</span>
+                                        <span class="discount">-10%</span>
+                                    </div>
+                                    <button class="btn btn-primary cart-btn">Add to Cart</button>
+                                    </div>
+                                </div>
+                                {% endfor %}
+
+                 </section>
+              </div>
+           </div>
+        </div>
+    </div>
+     
+{% endblock %}

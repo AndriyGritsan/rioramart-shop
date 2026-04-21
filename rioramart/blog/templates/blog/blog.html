@@ -1,0 +1,135 @@
+{% extends "core/base.html" %}
+{% load static %}
+{% block content %}
+
+ 
+    <!-- breadcrumbs -->
+      <nav class="container mt-4 mt-sm-4 mt-md-4 mt-lg-3 d-flex flex-wrap align-items-center gap-2 px-3">
+        <div class="d-flex align-items-center gap-2">
+          <a href="{% url 'home' %}">
+            <svg class="text-primary" stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 576 512" height="20px" width="20px" xmlns="http://www.w3.org/2000/svg">
+              <path d="M280.37 148.26L96 300.11V464a16 16 0 0 0 16 16l112.06-.29a16 16 0 0 0 15.92-16V368a16 16 0 0 1 16-16h64a16 16 0 0 1 16 16v95.64a16 16 0 0 0 16 16.05L464 480a16 16 0 0 0 16-16V300L295.67 148.26a12.19 12.19 0 0 0-15.3 0zM571.6 251.47L488 182.56V44.05a12 12 0 0 0-12-12h-56a12 12 0 0 0-12 12v72.61L318.47 43a48 48 0 0 0-61 0L4.34 251.47a12 12 0 0 0-1.6 16.9l25.5 31A12 12 0 0 0 45.15 301l235.22-193.74a12.19 12.19 0 0 1 15.3 0L530.9 301a12 12 0 0 0 16.9-1.6l25.5-31a12 12 0 0 0-1.7-16.93z"></path>
+            </svg>
+          </a>
+          <svg stroke="currentColor" fill="none" stroke-width="2" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round" class="text-muted ml-2" height="18px" width="18px" xmlns="http://www.w3.org/2000/svg">
+            <polyline points="9 18 15 12 9 6"></polyline>
+          </svg>
+        </div>
+        <div class="d-flex align-items-center gap-2 ml-1">
+          <a class="text-muted text-decoration-none pointer-events-none" href="#">Blog</a>
+        </div>
+      </nav>
+    <!-- end breadcrumbs -->
+    
+    <section class="blog-section">
+        <div class="container">
+            <div class="row mt-50">
+                <div class="col-lg-8">
+                    <div class="row">
+                        {% for post in posts %}
+                        <div class="col-lg-6 col-md-6 mb-5">
+                            <div class="blog-item p-1">
+                                <div class="blog-wraper">
+                                     <div class="blog-header">
+                                          <a href="{% url 'blog_single' post.slug %}">
+                                              <div class="img-zoom">
+                                                  <img src="{{ post.image.url }}" alt="eCommerce Html Template" class="img-fluid w-100">
+                                              </div>
+                                          </a>
+                                    </div>
+                                    <div class="blog-body pb-4 px-3 pt-1 position-relative">
+                                        <div class="blog-date"><i class="bi bi-calendar"></i><span class="ml-2">{{ post.created_at|date:"M d, Y" }}</span></div>
+                                        <div>
+                                              <div class="h5 blog-title mt-3">
+                                                  <a href="{% url 'blog_single' post.slug %}" class="text-inherit">{{ post.title }}</a>
+                                              </div>
+                                              <div class="blog-desc my-2">
+                                                  <p class="text-inherit">{{ post.content|truncatechars:120 }}</p>
+                                              </div>
+                                              <div class="text-muted mt-2">
+                                                  <a href="{% url 'blog_single' post.slug %}" class="read-more">Read More</a>
+                                              </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                    <div class="row mb-5">
+                        <div class="col-lg-12">
+                            <div class="my-4 d-flex border py-4 px-2 align-items-center justify-content-between">
+                                <ul class="d-flex align-items-center list-unstyled mb-0 pagination">
+                                  <li class="text-muted">
+                                    <svg  stroke="currentColor" fill="none" stroke-width="2" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round" height="20px" width="20px" xmlns="http://www.w3.org/2000/svg">
+                                        <line x1="19" y1="12" x2="5" y2="12"></line>
+                                        <polyline points="12 19 5 12 12 5"></polyline>
+                                    </svg>
+                                  </li>
+                                  <li class="rounded bg-primary">
+                                     <a href="#" class="text-white">1</a>
+                                  </li>
+                                  <li class="cursor-pointer  rounded"><a href="#">2</a></li>
+                                  <li class="cursor-pointer rounded"><a href="#">3</a></li>
+                                  <li class="cursor-pointer rounded">
+                                    <a href="#">
+                                        <svg class="text-primary" stroke="currentColor" fill="none" stroke-width="2" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round" height="20px" width="20px" xmlns="http://www.w3.org/2000/svg">
+                                            <line x1="5" y1="12" x2="19" y2="12"></line>
+                                            <polyline points="12 5 19 12 12 19"></polyline>
+                                        </svg>
+                                    </a>
+                                  </li>
+                                </ul>
+                                <div class="d-none d-lg-flex text-right mr-3">Showing 1 - 6 of 7 items</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="sidebar-wrap mt-1">
+                        <div class="sidebar-blog search rounded-0 card p-4 mb-3 border-0">
+                            <input type="text" class="form-control rounded-0 py-2" placeholder="search">
+                            <a href="#" class="btn btn-primary mt-3 rounded-0">Search</a>
+                        </div>
+                        <div class="sidebar-blog latest-post card rounded-0 border-0 p-4 mb-3">
+                            <h5>Latest Posts</h5>
+                            <div class="d-flex border-bottom py-3 latest-post-item">
+                                <a href="#"><img class="mr-4" src="{% static 'assets/images/blog-1.png' %}" width="87" height="65" alt=""></a>
+                                <div class="ms-4">
+                                    <h6 class="mb-2"><a href="#">Lorem ipsum dolor sit amet</a></h6>
+                                    <span class="text-sm text-muted">03 Jan 2024</span>
+                                </div>
+                            </div>
+
+                            <div class="d-flex border-bottom py-3 latest-post-item">
+                                <a href="#"><img class="mr-4" src="{% static 'assets/images/blog-2.png' %}" width="87"  height="65" alt=""></a>
+                                <div class="ms-4">
+                                    <h6 class="my-2"><a href="#">Lorem ipsum dolor sit amet</a></h6>
+                                    <span class="text-sm text-muted">03 Jan 2024</span>
+                                </div>
+                            </div>
+
+                            <div class="d-flex py-3 latest-post-item">
+                                <a href="#"><img class="mr-4" src="{% static 'assets/images/blog-3.png' %}" width="87" height="65" alt=""></a>
+                                <div class="ms-4">
+                                    <h6 class="my-2"><a href="#">Lorem ipsum dolor sit amet</a></h6>
+                                    <span class="text-sm text-muted">03 Jan 2024</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="sidebar-blog bg-white rounded-0 tags p-4 mb-3">
+                            <h5 class="mb-4">Tags</h5>
+                            <a href="#">Mobile</a>
+                            <a href="#">Laptop</a>
+                            <a href="#">Fashion</a>
+                            <a href="#">Toys</a>
+                            <a href="#">Kids</a>
+                            <a href="#">Women</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+{% endblock %}

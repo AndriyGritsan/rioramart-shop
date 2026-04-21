@@ -1,0 +1,51 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+<meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RivoraMart – Free Multipurpose Bootstrap 5 eCommerce Template</title>
+    <meta name="description" content="">
+    <link rel="icon" type="{% static 'image/x-icon' %}" href="./assets/images/favicon.ico">
+    <link rel="stylesheet" href="{%  static 'assets/css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" />
+    <link rel="stylesheet" href="{% static 'assets/plugin/nice-select/nice-select.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/plugin/OwlCarousel2-2.3.4/dist/assets/owl.carousel.min.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/plugin/OwlCarousel2-2.3.4/dist/assets/owl.theme.default.min.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/plugin/nouislider/nouislider.min.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    <link rel="stylesheet" href="{% static 'assets/css/style.css' %}">
+</head>
+<body>
+
+
+    <!--header-->
+    {% include 'core/partials/header.html' %}
+
+    <!--menu-->
+    {% include 'core/partials/menu.html' %}
+
+
+
+    <main>
+        {% block content %}
+        {% endblock %}
+    </main>
+
+
+
+    <!--footer-->
+    {% include 'core/partials/footer.html' %}
+
+    <!--Java script-->
+    <script src="{% static 'assets/js/jquery-3.6.0.min.js' %}"></script>
+    <script src="{% static 'assets/js/bootstrap.bundle.min.js' %}"></script>
+    <script src="{% static 'assets/plugin/nice-select/jquery.nice-select.min.js' %}"></script>
+    <script src="{% static 'assets/plugin/OwlCarousel2-2.3.4/dist/owl.carousel.min.js' %}"></script>
+    <script src="{% static 'assets/plugin/nouislider/nouislider.min.js' %}"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/wow/1.1.2/wow.min.js"></script>
+    <script src="{% static 'assets/js/main.js' %}"></script>
+
+</body>
+</html>

@@ -1,0 +1,305 @@
+{% extends "core/base.html" %}
+{% load static %}
+{% block content %}
+<!-- Banner Slider -->
+<div class="banner py-3">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-md-12 col-sm-12 col-12 mb-3 mb-lg-0">
+                <div class="owl-carousel owl-theme banner-slider">
+                    {% for banner in main_banners %}
+                    <div class="position-relative">
+                        <img src="{{ banner.image.url }}" class="" alt="eCommerce Template">
+                        <div class="banner-content position-absolute align-items-center">
+                            <div class="banner-title-wrap wow animate__animated animate__fadeInUp"
+                                data-wow-delay="0.2s">
+                                <h3 class="banner-title">{{ banner.title }}</h3>
+                            </div>
+                            <div class="banner-content-text">
+                                <p class="text-white wow animate__animated animate__fadeInUp m-0" data-wow-delay="0.4s" >{{ banner.title }}</p>
+                                <p class="text-white wow animate__animated animate__fadeInUp m-0 mt-2"  data-wow-delay="0.6s">{{ banner.subtitle }}</p>
+                            </div>
+                            <div class="banner-button mt-3 wow animate__animated animate__fadeInUp"
+                                data-wow-delay="0.9s">
+                                <a href="{{ banner.link }}"
+                                    class="btn btn-primary rounded-0 text-white text-uppercase ">{{ banner.button_text }}
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+  
+<!-- End Banner Slider -->
+
+<div class="feature-section mt-60">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="white-bg border px-4 py-3">
+                    <div class="row">
+                        <div class="mb-20 col-12 col-sm-12 col-md-6 col-lg-3">
+                            <div class="feature-item">
+                                <div class="feature-icon">
+                                    <img src="{% static 'assets/images/icon/delivery-truck.png' %}" class="w-100" alt="truck Icon">
+                                </div>
+                                <div class="feature-info pt-3 ps-2">
+                                    <h4>Free Shipping</h4>
+                                    <p>On orders over&nbsp;<strong>$50.</strong></p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="mb-20 col-12 col-sm-12 col-md-6 col-lg-3">
+                            <div class="feature-item">
+                                <div class="feature-icon">
+                                    <img src="{% static 'assets/images/icon/loan.png' %}" class="w-100" alt="truck Icon">
+                                </div>
+                                <div class="feature-info pt-3 ps-2">
+                                    <h4>Money Back</h4>
+                                    <p>Money back in 7 days.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="mb-20 col-12 col-sm-12 col-md-6 col-lg-3">
+                            <div class="feature-item">
+                                <div class="feature-icon">
+                                    <img src="{% static 'assets/images/icon/credit-card.png' %}" class="w-100" alt="truck Icon">
+                                </div>
+                                <div class="feature-info pt-3 ps-2">
+                                    <h4>Secure Checkout</h4>
+                                    <p>100% Payment Secure.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="mb-20 col-12 col-sm-12 col-md-6 col-lg-3">
+                            <div class="feature-item">
+                                <div class="feature-icon">
+                                    <img src="{% static 'assets/images/icon/customer-service.png' %}" class="w-100" alt="truck Icon">
+                                </div>
+                                <div class="feature-info pt-3 ps-2">
+                                    <h4>Online Support</h4>
+                                    <p>Ensure the product quality</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Categories Section -->
+<div class="category-list mt-60">
+    <div class="container">
+        <div class="owl-carousel category-slider">
+            {% for category in categories %}
+            <div class="item">
+                <a href="{% url 'shop' %}?category={{ category.id }}">
+                    <img src="{{ category.image.url }}" class="img-fluid" alt="eCommerce Template">
+                    <div class="category-title d-flex justify-content-center align-items-center">
+                        <p class="text-nowrap mt-2 fw-normal text-black">{{ category.name }}</p>
+                    </div>
+                </a>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+<!-- End Categories Section -->
+
+<div class="container mt-60">
+    <div class="row">
+        <!-- Deals Of The Day -->
+        <div class="col-12 col-md-12 col-lg-6 mb-3 mb-lg-0">
+            <h5 class="fw-bold fs-4 mb-4">Deals Of The Days</h5>
+            <div class="owl-carousel owl-theme deal-slider">
+                {% for product in deals %}
+                <div class="deal-card">
+                    <span class="badge-new">New Product</span>
+                    <span class="wishlist-icon"><i class="fas fa-heart"></i></span>
+                    <div class="row g-3">
+                        <div class="col-md-5">
+                            <a href="{% url 'shop_single' product.slug %}">
+                                <img src="{{ product.photo.url }}" class="img-fluid product-img" alt="product">
+                            </a>
+                        </div>
+                        <div class="col-md-7">
+                            <h6><a href="{% url 'shop_single' product.slug %}">{{ product.name }}</a></h6>
+                            <div class="rating mb-2">
+                                <span class="d-flex align-items-center">
+                                    <span class="star-icon text-warning">★</span>
+                                    <span class="star-icon text-warning">★</span>
+                                    <span class="star-icon text-warning">★</span>
+                                    <span class="star-icon text-warning">★</span>
+                                    <span class="star-icon text-warning">★</span>
+                                </span>
+                            </div>
+                            <div class="mb-2">
+                                {% if product.old_price %}
+                                    <span class="old-price">{{ product.old_price }}</span>
+                                {% endif %}
+                                <span class="price">{{ product.price }}</span>
+                                <span class="discount">5%</span>
+                            </div>
+                            <button class="btn btn-primary w-100 my-3">Add to cart</button>
+                            <p class="mt-2 small text-muted">Availability: {{ product.stock }} In Stock</p>
+
+                            <!-- Countdown -->
+                            <div class="countdown" id="deal-countdown" data-second="95620">
+                                <div><strong id="days">0</strong><span>Days</span></div>
+                                <div><strong id="hours">0</strong><span>Hours</span></div>
+                                <div><strong id="minutes">0</strong><span>Mins</span></div>
+                                <div><strong id="seconds">0</strong><span>Secs</span></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+                
+        <!-- New Arrivals -->
+        <div class="col-12 col-md-12 col-lg-6">
+            <h5 class="fw-bold fs-4 mb-4">New Arrivals</h5>
+            <div class="owl-carousel owl-theme new-arrivals-slider">
+                {% for product in new_products %}
+                <!-- Product Item -->
+                <div class="product-card">
+                    <span class="wishlist-icon"><i class="fas fa-heart"></i></span>
+                    <a href="{% url 'shop_single' product.slug %}">
+                        <img src="{{ product.photo.url }}" class="img-fluid mb-2 product-img" alt="product">
+                    </a>
+                    <h6><a href="{% url 'shop_single' product.slug %}">{{ product.name }}</a></h6>
+                    <div class="rating">
+                        <span class="d-flex align-items-center">
+                            <span class="star-icon text-warning">★</span>
+                            <span class="star-icon text-warning">★</span>
+                            <span class="star-icon text-warning">★</span>
+                            <span class="star-icon text-warning">★</span>
+                            <span class="star-icon text-warning">★</span>
+                        </span>
+                    </div>
+                    <div>
+                        {% if product.old_price %}
+                            <span class="old-price">{{ product.old_price }}</span>
+                        {% endif %}
+                        <span class="price">{{ product.price }}</span>
+                        <span class="discount">-10%</span>
+                    </div>
+                    <button class="btn btn-primary cart-btn">Add to Cart</button>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</div>
+        
+<div class="hero-banner-area mt-60">
+    <div class="container">
+        <div class="row">
+            <!-- Single -->
+             {% for banner in side_banners %}
+            <div class="col-lg-4 col-sm-6 mb-4">
+                <div class="hero-banner-item">
+                    <img src="{{ banner.image.url }}" alt="banner">
+                    <div class="hero-banner-item-overly">
+                        <div class="hero-banner-item-overly-full">
+                            <h4>{{ banner.subtitle }}</h4>
+                            <h3>{{ banner.title }}</h3>
+                            <a class="btn btn-primary btn-sm mt-2" href="{{ banner.link }}">{{ banner.button_text }}</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+
+<div class="container mt-60">
+    <div class="d-flex justify-content-between align-items-center mb-3">
+        <h5 class="mb-0 section-title">Recommended for You</h5>
+    </div>
+    <div class="owl-carousel owl-theme product-recommended-slider">
+        {% for product in recommended %}
+        <div class="product-card">
+            {% if not product.available %}
+                <span class="badge-new bg-danger">Out of stock</span>
+            {% endif %}
+            <span class="wishlist-icon"><i class="fas fa-heart"></i></span>
+            <a href="{% url 'shop_single' product.slug %}">
+                <img src="{{ product.photo.url }}" class="img-fluid mb-2 product-img" alt="product">
+            </a>
+            <h6><a href="{% url 'shop_single' product.slug %}">{{ product.name }}</a></h6>
+            <div class="rating">
+                <span class="d-flex align-items-center">
+                    <span class="star-icon text-warning">★</span>
+                    <span class="star-icon text-warning">★</span>
+                    <span class="star-icon text-warning">★</span>
+                    <span class="star-icon text-warning">★</span>
+                    <span class="star-icon text-warning">★</span>
+                </span>
+            </div>
+            <div>
+                {% if product.old_price %}
+                    <span class="old-price">{{ product.old_price }}</span>
+                {% endif %}
+                <span class="price">{{ product.price }}</span>
+                {% if product.old_price %}
+                    <span class="discount">-{{ product.old_price|floatformat:0|add:"-product.price"|floatformat:0 }}</span>
+                {% endif %}
+            </div>
+            <button class="btn btn-primary cart-btn">Add to Cart</button>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
+<!-- Start Blog Section -->
+<div class="blog-section mt-60">
+    <div class="container">
+        <div class="d-flex justify-content-between align-items-center mb-3">
+            <h5 class="mb-0 section-title">Latest Blog</h5>
+        </div>
+
+        <div class="owl-carousel  owl-theme blog-slider">
+            {% for blog in blogs %}
+            <div class="blog-item p-1">
+                <div class="blog-wraper">
+                    <div class="blog-header">
+                        <a href="{% url 'blog_single' blog.slug %}">
+                            <div class="img-zoom">
+                                <img src="{{ blog.image.url }}" alt="eCommerce Html Template"
+                                    class="img-fluid w-100">
+                            </div>
+                        </a>
+                    </div>
+                    <div class="blog-body pb-4 px-3 pt-1 position-relative">
+                        <div class="blog-date"><i class="bi bi-calendar"></i><span class="ml-2">{{ blog.created_at|date:"M d, Y" }}</span>
+                        </div>
+                        <div>
+                            <div class="h5 blog-title mt-3">
+                                <a href="{% url 'blog_single' blog.slug %}" class="text-inherit">{{ blog.title }}</a>
+                            </div>
+                            <div class="blog-desc my-2">
+                                <p class="text-inherit">{{ blog.content|truncatewords:20 }}</p>
+                            </div>
+                            <div class="text-muted mt-2">
+                                <a href="{% url 'blog_single' blog.slug %}" class="read-more">Read More</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+<!-- End Blog Section -->
+
+{% endblock %}

@@ -1,0 +1,456 @@
+{% extends "core/base.html" %}
+{% load static %}
+{% block content %}
+
+
+<!-- breadcrumbs -->
+<nav class="container mt-4 mt-sm-4 mt-md-4 mt-lg-3 d-flex flex-wrap align-items-center gap-2 px-3">
+  <div class="d-flex align-items-center gap-2">
+    <a href="{% url 'shop' %}">
+      <svg class="text-primary" stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 576 512"
+        height="20px" width="20px" xmlns="http://www.w3.org/2000/svg">
+        <path
+          d="M280.37 148.26L96 300.11V464a16 16 0 0 0 16 16l112.06-.29a16 16 0 0 0 15.92-16V368a16 16 0 0 1 16-16h64a16 16 0 0 1 16 16v95.64a16 16 0 0 0 16 16.05L464 480a16 16 0 0 0 16-16V300L295.67 148.26a12.19 12.19 0 0 0-15.3 0zM571.6 251.47L488 182.56V44.05a12 12 0 0 0-12-12h-56a12 12 0 0 0-12 12v72.61L318.47 43a48 48 0 0 0-61 0L4.34 251.47a12 12 0 0 0-1.6 16.9l25.5 31A12 12 0 0 0 45.15 301l235.22-193.74a12.19 12.19 0 0 1 15.3 0L530.9 301a12 12 0 0 0 16.9-1.6l25.5-31a12 12 0 0 0-1.7-16.93z">
+        </path>
+      </svg>
+    </a>
+    <svg stroke="currentColor" fill="none" stroke-width="2" viewBox="0 0 24 24" stroke-linecap="round"
+      stroke-linejoin="round" class="text-muted ms-2" height="18px" width="18px" xmlns="http://www.w3.org/2000/svg">
+      <polyline points="9 18 15 12 9 6"></polyline>
+    </svg>
+  </div>
+  <div class="d-flex align-items-center gap-2 ml-1">
+    <a class="text-muted text-decoration-none pointer-events-none" href="#">Shop Details</a>
+  </div>
+</nav>
+<!-- end breadcrumbs -->
+
+<div class="product-details">
+  <div class="container">
+    <section class="mt-5">
+      <div class="row">
+        <div class="col-12 col-lg-5 px-2 px-sm-2 px-md-2 px-lg-0">
+          <div class="product-container">
+            <!-- Thumbnails -->
+            <div class="thumbnail-wrapper">
+              <div class="thumb-arrow" id="thumbUp">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                  stroke="currentColor" width="24" height="24">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 15.75 7.5-7.5 7.5 7.5" />
+                </svg>
+              </div>
+              <div class="thumbnail-container" id="thumbContainer">
+                <div class="thumbnail active" 
+                      data-image="{{ product.photo.url }}">
+                      <img src="{{ product.photo.url }}" alt="{{ product.name }}">
+                    </div>
+              </div>
+
+              <div class="thumb-arrow" id="thumbDown">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                  stroke="currentColor" width="24" height="24">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" />
+                </svg>
+              </div>
+            </div>
+      
+
+            <!-- Main Image with Magnifier -->
+            <div class="image-magnifier-container">
+              <div class="main-image-container" id="mainImageContainer">
+                <img id="productImage" src="{{ product.photo.url }}" alt="Product">
+                <div class="magnifier-lens"></div>
+              </div>
+              <div class="magnifier-preview">
+                <img src="{{ product.photo.url }}" alt="Zoomed Product" id="zoomedImage">
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-12 col-lg-7 px-2 px-sm-2 px-md-2 px-lg-0">
+          <div class="col-lg-12 col-md-12 mb-4">
+            <div class="mb-2 d-flex align-items-center justify-content-between">
+              <div class="d-flex align-items-center">
+                <span>
+                  <span class="star-icon text-warning">&#9733;</span>
+                  <span class="star-icon text-warning">&#9733;</span>
+                  <span class="star-icon text-warning">&#9733;</span>
+                  <span class="star-icon text-warning">&#9733;</span>
+                  <span class="star-icon text-warning">&#9733;</span>
+                </span>
+                <small class="text-muted ms-2">(2)</small>
+              </div>
+              <span class="badge badge-success p-2 text-white">
+                In Stock
+              </span>
+            </div>
+            <h1 class="h4 font-weight-semibold text-secondary">
+              {{ product.name }}
+            </h1>
+            <div class="my-2 d-flex align-items-center">
+              <span class="text-primary h5 font-weight-bold">{{ product.price }}</span>
+              {% if product.old_price %}
+                <span class="text-muted ms-2"><s>{{ product.old_price }}</s></span>
+              {% endif %}
+              <span class="badge badge-danger px-2 ms-2">-25% off</span>
+            </div>
+            <div class="mb-3 border-bottom pb-3">
+              <p class="text-truncate-3">
+                {{ product.description|truncatechars:120 }}
+              </p>
+            </div>
+            <div class="my-3 size-section">
+              <span class="font-weight-bold text-secondary">Size:</span>
+              <div class="size-custom-radios mt-2">
+                <div class="size-item">
+                  <input type="radio" id="size-s" name="size" value="s" checked="">
+                  <label for="size-s">
+                    <span>S</span>
+                  </label>
+                </div>
+                <div class="size-item">
+                  <input type="radio" id="size-m" name="size" value="m">
+                  <label for="size-m">
+                    <span>
+                      M
+                    </span>
+                  </label>
+                </div>
+                <div class="size-item">
+                  <input type="radio" id="size-l" name="size" value="l">
+                  <label for="size-l">
+                    <span>
+                      L
+                    </span>
+                  </label>
+                </div>
+                <div class="size-item">
+                  <input type="radio" id="size-xl" name="size" value="l">
+                  <label for="size-xl">
+                    <span>
+                      XL
+                    </span>
+                  </label>
+                </div>
+              </div>
+            </div>
+            <div class="my-3 color-section">
+              <span class="font-weight-bold text-secondary">Colors:</span>
+              <div class="custom-radios mt-2">
+                <div class="color-item">
+                  <input type="radio" id="color-1" name="color" value="#000" checked="">
+                  <label for="color-1">
+                    <span style="--color: #000;">
+                      <img src="{% static 'assets/images/icon/check-icn.svg' %}" alt="Checked Icon">
+                    </span>
+                  </label>
+                </div>
+                <div class="color-item">
+                  <input type="radio" id="color-2" name="color" value="#f1c40f">
+                  <label for="color-2">
+                    <span style="--color: #f1c40f;">
+                      <img src="{% static 'assets/images/icon/check-icn.svg' %}" alt="Checked Icon">
+                    </span>
+                  </label>
+                </div>
+                <div class="color-item">
+                  <input type="radio" id="color-3" name="color" value="#3e74c3c">
+                  <label for="color-3">
+                    <span style="--color: #e74c3c;">
+                      <img src="{% static 'assets/images/icon/check-icn.svg' %}" alt="Checked Icon">
+                    </span>
+                  </label>
+                </div>
+              </div>
+            </div>
+            <div class="my-3">
+              <span class="font-weight-bold text-secondary">Quantity:</span>
+              <div class="d-flex mt-2">
+                <div class="qty-container">
+                  <button class="qty-btn-minus count-decreament" type="button"><i class="fas fa-minus"></i></button>
+                  <input type="number" name="qty" value="1" class="input-qty input-cornered">
+                  <button class="qty-btn-plus count-increament" type="button"><i class="fas fa-plus"></i></button>
+                </div>
+                <div>
+                  <a href="{% url 'add_to_cart' product.slug %}?quantity=1" class="btn btn-primary btn-block ms-3 py-2"><i class="fa fa-shopping-cart"></i>
+                    <span class="d-none d-md-inline-block d-lg-inline-block">Add to cart</span></a>
+                </div>
+                <div>
+                  <a href="{% url 'checkout' %}" class="btn btn-danger btn-block ms-3 py-2"><i class="fa-solid fa-fire"></i>
+                    Buy Now</a>
+                </div>
+              </div>
+            </div>
+            <div class="my-3 border-bottom pb-3">
+              <a href="#" class="text-decoration-none"><i class="far fa-heart me-2"></i>Add to wishlist</a>
+            </div>
+            <div class="my-3 d-flex align-items-center">
+              <span class="font-weight-bold text-secondary">Available:</span>
+              <span class="text-success ms-2">10 items in Stock</span>
+            </div>
+            <div class="my-3 category-tag">
+              <span class="font-weight-bold text-secondary">Category:</span>
+              <a href="#" class="text-primary ml-1 text-decoration-none ">Jewellery Set</a>
+            </div>
+            <div class="my-3 category-tag">
+              <span class="font-weight-bold text-secondary">Tags:</span>
+              <a href="#" class="text-primary ml-1 text-decoration-none ">Women Accessories,</a>
+              <a href="#" class="text-primary ml-1 text-decoration-none ">Jewellery</a>
+            </div>
+            <div class="my-3">
+              <span class="font-weight-bold text-secondary">Share:</span>
+              <div class="mt-2 d-flex align-items-center">
+                <a href="#" class="btn btn-outline-primary me-2">
+                  <i class="fab fa-facebook"></i>
+                </a>
+                <a href="#" class="btn btn-outline-dark me-2">
+                  <i class="fab fa-twitter"></i>
+                </a>
+                <a href="#" class="btn btn-outline-success me-2">
+                  <i class="fab fa-whatsapp"></i>
+                </a>
+                <a href="#" class="btn btn-outline-primary">
+                  <i class="fab fa-pinterest"></i>
+                </a>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+    <section class="mt-50">
+      <div class="product-detail-review">
+        <div class="row">
+          <div class="col-md-12">
+            <ul class="nav nav-pills" id="myTab" role="tablist">
+              <!-- nav item -->
+              <li class="nav-item">
+                <!-- btn -->
+                <a class="nav-link active" id="product-tab1" data-bs-toggle="tab" data-bs-target="#product-tab-panel-1"
+                  href="#product-tab-panel-1" role="tab" aria-controls="product-tab-pane" aria-selected="true">
+                  Product Details
+                </a>
+              </li>
+              <!-- nav item -->
+              <li class="nav-item">
+                <!-- btn -->
+                <a class="nav-link" id="product-tab2" data-bs-toggle="tab" data-bs-target="#product-tab-panel-2"
+                  href="#product-tab-panel-2" role="tab" aria-controls="product-tab-pane" aria-selected="true">
+                  More Information
+                </a>
+              </li>
+            </ul>
+            <!-- tab content -->
+            <div class="tab-content" id="myTabContent">
+              <!-- tab pane -->
+              <div class="tab-pane fade show active" id="product-tab-panel-1" role="tabpanel"
+                aria-labelledby="product-tab" tabindex="0">
+                <div class="my-4">
+                  <p>{{ product.description }}</p>
+                </div>
+              </div>
+              <!-- tab pane -->
+              <div class="tab-pane fade" id="product-tab-panel-2" role="tabpanel" aria-labelledby="product-tab"
+                tabindex="0">
+                <div class="my-4">
+                  <div class="row">
+                    <div class="col-12 col-sm-12 col-md-12 col-lg-6">
+                      <table class="table table-striped">
+                        <!-- table -->
+                        <tbody>
+                          <tr>
+                            <th>Weight</th>
+                            <td>{{ product.weight }}</td>
+                          </tr>
+                          <tr>
+                            <th>Type</th>
+                            <td>{{ product.product_type }}</td>
+                          </tr>
+                          <tr>
+                            <th>Brand</th>
+                            <td>{{ product.brand }}</td>
+                          </tr>
+                          <tr>
+                            <th>Package Quantity</th>
+                            <td>{{ product.package_quantity }}</td>
+                          </tr>
+                          <tr>
+                            <th>Manufacturer</th>
+                            <td>{{ product.manufacturer }}</td>
+                          </tr>
+                          <tr>
+                            <th>Net Quantity</th>
+                            <td>{{ product.net_quantity }}</td>
+                          </tr>
+                          <tr>
+                            <th>Product Dimensions</th>
+                            <td>{{ product.dimensions }}</td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="my-5">
+      <div class="related-product">
+        <div class="mb-4 d-flex align-items-center justify-content-between pb-2">
+        <h2 class="h4 font-weight-bold text-secondary position-relative pb-2 mb-0 section-title">
+          Related Items
+        </h2>
+      </div>
+        <div class="product mt-4">
+            <div class="owl-carousel owl-theme product-recommended-slider">
+        {% for product in related_products %}
+        <div class="product-card">
+          {% if not product.available %}
+            <span class="badge-new bg-danger">Out of stock</span>
+            {% endif %}
+          <span class="wishlist-icon"><i class="fas fa-heart"></i></span>
+          <a href="{% url 'shop_single' product.slug %}">
+              <img src="{{ product.photo.url }}" class="img-fluid mb-2 product-img" alt="product">
+          </a>
+          <h6><a href="{% url 'shop_single' product.slug %}">{{ product.name }}</a></h6>
+          <div class="rating">
+            <span class="d-flex align-items-center">
+                <span class="star-icon text-warning">★</span>
+                <span class="star-icon text-warning">★</span>
+                <span class="star-icon text-warning">★</span>
+                <span class="star-icon text-warning">★</span>
+                <span class="star-icon text-warning">★</span>
+            </span>
+          </div>
+          <div>
+            {% if product.old_price %}
+              <span class="old-price">{{ product.old_price }}</span>
+            {% endif %}
+            <span class="price">{{ product.price }}</span>
+            <span class="discount">-10%</span>
+          </div>
+           <button class="btn btn-primary cart-btn">Add to Cart</button>
+        </div>
+      </div>
+      {% endfor %}
+    </section>
+
+    <section class="mt5 review-section">
+      <div class="mb-4 d-flex align-items-center justify-content-between pb-2">
+        <h2 class="h4 font-weight-bold text-secondary position-relative pb-2 mb-0 section-title">
+          Reviews {{ reviews.count }}
+        </h2>
+        <div>
+          <a href="#" class="btn btn-primary text-decoration-none" data-bs-toggle="modal" data-bs-target="#reviewModal">
+            <svg class="me-1" stroke="currentColor" fill="none" stroke-width="2" viewBox="0 0 24 24"
+              stroke-linecap="round" stroke-linejoin="round" height="16" width="16"
+              xmlns="http://www.w3.org/2000/svg">
+              <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path>
+              <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path>
+            </svg>
+            Write a review
+          </a>
+        </div>
+      </div>
+      <div class="row mb-4">
+        <div class="col-lg-8 mb-4 order-lg-1">
+          <div>
+            {% for review in reviews %}
+            <div class="d-flex align-items-start mt-3">
+              <figure class="d-none d-sm-block rounded-circle overflow-hidden shadow-sm"
+                style="height: 56px; width: 56px; min-width: 56px;">
+                <img class="img-fluid" src="{% static 'assets/images/client/1.png' %}" alt="profile_logo">
+              </figure>
+              <div class="ms-3">
+                <div class="d-flex align-items-center mb-2">
+                  <a class="font-weight-bold text-primary" href="#">{{ review.name }}</a>
+                  <span class="text-muted ms-2">{{ review.created_at }}</span>
+                </div>
+                <p class="mb-2">
+                  {{ review.text }}
+                </p>
+              </div>
+            </div>
+              {% endfor %}
+          </div>
+        </div>
+      </div>
+        
+        <div class="col-lg-4 mb-4 order-lg-2">
+          <div class="d-flex flex-column flex-sm-column flex-md-row flex-lg-row px-5 px-sm-5 px-md-0 px-lg-0">
+            <div class="row align-items-start g-4 flex-grow-1">
+            <div class="col-4 text-center">
+              <div class="rating-value">{{ avg_rating|floatformat:1 }} <span class="rating-star">★</span></div>
+              <p class="text-muted mb-0">{{ reviews_count }} Ratings </p>
+              <p class="text-muted">{{ reviews_count }} Reviews</p>
+            </div>
+            <div class="col-8">
+              <div class="d-flex align-items-center mb-2">
+                <div class="me-2" style="width:30px;">{{ five_star }}</div>
+                <div class="flex-grow-1">
+                  <div class="progress">
+                    <div class="progress-bar bg-success" style="width: {{ five_star_pct }}"></div>
+                  </div>
+                </div>
+                <div class="ms-2 text-muted">{{ five_star }}</div>
+              </div>
+              
+              <div class="d-flex align-items-center mb-2">
+                <div class="me-2" style="width:30px;">{{ four_star }}</div>
+                <div class="flex-grow-1">
+                  <div class="progress">
+                    <div class="progress-bar bg-success" style="width: {{ four_start_pct }}"></div>
+                  </div>
+                </div>100
+                <div class="ms-2 text-muted">{{ four_star }}</div>
+              </div>
+              
+              <div class="d-flex align-items-center mb-2">
+                <div class="me-2" style="width:30px;">{{ three_star }}</div>
+                <div class="flex-grow-1">
+                  <div class="progress">
+                    <div class="progress-bar bg-warning" style="width: {{ three_star_pct }}"></div>
+                  </div>
+                </div>
+                <div class="ms-2 text-muted">{{ three_star }}</div>
+              </div>
+              
+              <div class="d-flex align-items-center mb-2">
+                <div class="me-2" style="width:30px;">{{ two_star }}</div>
+                <div class="flex-grow-1">
+                  <div class="progress">
+                    <div class="progress-bar bg-orange" style="width: two_star_pct; background-color: #ff9800;"></div>
+                  </div>
+                </div>
+                <div class="ms-2 text-muted">{{ two_star }}</div>
+              </div>
+              
+              <div class="d-flex align-items-center">
+                <div class="me-2" style="width:30px;">{{ one_star }}</div>
+                <div class="flex-grow-1">
+                  <div class="progress">
+                    <div class="progress-bar bg-danger" style="width: {{ one_start_pct }}></div>
+                  </div>
+                </div>
+                <div class="ms-2 text-muted">{{ one_star }}</div>
+              </div>
+            </div>
+
+            
+
+          </div>
+
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </div>
+</div>
+
+{% endblock %}
