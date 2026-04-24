@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from django.views.generic import CreateView
-from .forms import RegisterForm, PasswordResetForm
+from .forms import RegisterForm, PasswordResetForm, LoginForm
 from django.contrib.auth.views import LoginView
 from django.contrib.auth import logout
 from django.contrib.auth.decorators import login_required
@@ -16,6 +16,7 @@ class RegisterUserView(CreateView):
     
 class LoginUserView(LoginView):
     template_name = 'accounts/login.html'
+    form_class = LoginForm
     def get_success_url(self):
         return self.request.GET.get('next', '/')
     
@@ -33,4 +34,5 @@ def account(request):
 class PasswordResetView(auth_views.PasswordResetView):
     template_name = 'accounts/forgot-password.html'
     form_class = PasswordResetForm
+    success_url = '/accounts/login/' 
     

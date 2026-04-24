@@ -2,13 +2,31 @@ from django import forms
 from .models import Order
 
 class OrderForm(forms.ModelForm):
+    
+    COUNTRIES = [
+            ('', 'Select your Country'),
+            ('UK', 'United Kingdom'),
+            ('US', 'United States'),
+            ('BD', 'Bangladesh'),
+            ('AU', 'Australia'),
+            ('CA', 'Canada'),
+            ('CN', 'China'),
+            ('MA', 'Morocco'),
+            ('SA', 'Saudi Arabia')
+            ]
+            
+    country = forms.ChoiceField(choices=COUNTRIES, widget=forms.Select(attrs={'class': 'input-item gs_input_area'}))
+    shopping_country = forms.ChoiceField(choices=COUNTRIES, widget=forms.Select(attrs={'class': 'input-item gs_input_area w-100'}))     
+    
+    
     class Meta:
         model = Order
-        fields = ('first_name', 'last_name', 'email',  'phone', 'company_name', 'company_address', 
+        fields = ('first_name', 'last_name', 'email',  'phone', 'company_name', 'company_address', 'country',
                 'billing_address_line1',  'billing_address_line2', 'city', 'state', 'zip_code', 'shopping_first_name',
                 'shopping_last_name', 'shopping_email', 'shopping_phone', 'shopping_company', 
-                'shopping_address', 'shopping_address_line1', 'shopping_address_line2', 'shopping_city', 
+                'shopping_address', 'shopping_address_line1', 'shopping_country', 'shopping_address_line2', 'shopping_city', 
                 'shopping_state', 'shopping_zip_code', 'notes')
+          
           
         widgets = {
             'first_name': forms.TextInput(attrs={'class': 'input-item input-item-name gs_input_area',
@@ -55,9 +73,15 @@ class OrderForm(forms.ModelForm):
                                                  'placeholder': 'State:'}),
             'shopping_zip_code': forms.TextInput(attrs={'class': 'input-item gs_input_area',
                                                     'placeholder': 'Zip Code:'}),
-            'notes': forms.TextInput(attrs={'class': 'input-item input-item-textarea gs_input_area',
+            'notes': forms.Textarea(attrs={'class': 'input-item input-item-textarea gs_input_area',
                                         'placeholder': 'Notes about your order, e.g. Special notes for Delivery:'})
         }
         
         
-    
+#def __init__(self, *args, **kwargs):
+            #super().__init__(*args, **kwargs)
+
+#self.fields['shopping_country'].choices = COUNTRIES
+#self.fields['country'].choices = COUNTRIES
+#'country': forms.Select(attrs={'class': 'input-item gs_input_area'}),
+#'shopping_country': forms.Select(attrs={'class': 'input-item gs_input_area w-100'}),

@@ -404,9 +404,9 @@
                 <div class="me-2" style="width:30px;">{{ four_star }}</div>
                 <div class="flex-grow-1">
                   <div class="progress">
-                    <div class="progress-bar bg-success" style="width: {{ four_start_pct }}"></div>
+                    <div class="progress-bar bg-success" style="width: {{ four_star_pct }}"></div>
                   </div>
-                </div>100
+                </div>
                 <div class="ms-2 text-muted">{{ four_star }}</div>
               </div>
               
@@ -424,7 +424,7 @@
                 <div class="me-2" style="width:30px;">{{ two_star }}</div>
                 <div class="flex-grow-1">
                   <div class="progress">
-                    <div class="progress-bar bg-orange" style="width: two_star_pct; background-color: #ff9800;"></div>
+                    <div class="progress-bar bg-orange" style="width: {{ two_star_pct }}; background-color: #ff9800;"></div>
                   </div>
                 </div>
                 <div class="ms-2 text-muted">{{ two_star }}</div>
@@ -434,7 +434,7 @@
                 <div class="me-2" style="width:30px;">{{ one_star }}</div>
                 <div class="flex-grow-1">
                   <div class="progress">
-                    <div class="progress-bar bg-danger" style="width: {{ one_start_pct }}></div>
+                    <div class="progress-bar bg-danger" style="width:{{ one_star_pct }};"></div>
                   </div>
                 </div>
                 <div class="ms-2 text-muted">{{ one_star }}</div>

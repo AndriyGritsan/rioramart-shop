@@ -6,7 +6,7 @@
     <section class="auth-section mt-5">
         <div class="mt-4">
           <div class="mb-4 d-flex align-items-center justify-content-center gap-2">
-            <img class="h-7" src="./assets/images/logo.png" alt="logo" style="height: 1.75rem;">
+            <img class="h-7" src="{% static 'assets/images/logo.png' %}" alt="logo" style="height: 1.75rem;">
           </div>
           <h2 class="mb-4 text-center h5 font-weight-bold text-secondary">
             Get Started!
@@ -14,6 +14,7 @@
           <form method="post">
             {% csrf_token %}
             <div class="form-group position-relative mb-4">
+              {{ form.email.errors }}
               {{ form.email }}
             </div>
             <div class="form-group position-relative mb-4">

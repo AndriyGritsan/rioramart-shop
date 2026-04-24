@@ -23,6 +23,7 @@
       <div class="container mt-50 px-4">
         <div class="row">
             {% for item in wishlist %}
+              {% if item.product %}
         <div class="col-12 col-xs-6 col-md-4 col-xl-3">
              <div class="product-card">
                 <button class="btn btn-primary position-absolute close-wishlist">
@@ -35,7 +36,9 @@
                     <span class="badge-new bg-danger">Out of stock</span>
                 {% endif %}
                 <a href="#">
+                  {% if item.product.photo %}
                     <img src="{{ item.product.photo.url }}" class="img-fluid mb-2 product-img" alt="product">
+                    {% endif %}
                 </a>
                 <h6><a href="{% url 'shop_single' item.product.slug %}">{{ item.product.name }}</a></h6>
                 <div class="rating">★★★★★</div>
@@ -49,6 +52,7 @@
                 <button class="btn btn-primary cart-btn">Add to Cart</button>
             </div>
         </div>
+          {% endif %}
         {% endfor %}
       </div>
       </div>

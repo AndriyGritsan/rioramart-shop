@@ -16,6 +16,12 @@ class LoginForm(forms.Form):
                                           'placeholder': 'Password'})
     )
     
+    def __init__(self, *args, **kwargs):
+        self.request = kwargs.pop('request', None)
+        super().__init__(*args, **kwargs)
+        self.user_cache = None
+    
+    
     def confirm_login_allowed(self, user):
         if not user.is_active:
             raise forms.ValidationError("There was a problem with your login.")
@@ -31,16 +37,17 @@ class LoginForm(forms.Form):
         
         if email and password:
             self.user_cache = authenticate( username=email, password=password)
+            
             if self.user_cache is None:
                 raise forms.ValidationError('Invalid email or password')
             else:
                 self.confirm_login_allowed(self.user_cache)
         return cleaned_data
+    
+    def get_user(self):
+        return self.user_cache
                
   
-
-
-
 class RegisterForm(forms.ModelForm):
     password1 = forms.CharField(
         label='Password',
@@ -63,7 +70,7 @@ class RegisterForm(forms.ModelForm):
         password2 = self.cleaned_data.get('password2')
         
         if password1 and password2 and password1 != password2:
-            raise forms.ValidationError("Passwords dont`t match")
+            raise forms.ValidationError("Passwords don`t match")
         return password2
     
     def save(self, commit=True):

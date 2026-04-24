@@ -16,11 +16,13 @@
                     <div class="col-12 col-md-6 col-lg-12">
                         <div class="footer_newsletter pe-lg-5">
                             <h4 class="text-uppercase">Newsletter</h4>
+                            <form  method="post" action="{% url 'subscribe' %}" >
+                                {% csrf_token %}
                             <div class="input-group">
-                                <input id="searchInput" class="form-control w-50" type="text"
-                                    placeholder="Your email address">
-                                <button type="button" class="btn btn-primary bg-gradient">Subscribe</button>
+                                {{ subscription_form.email }}
+                                <button type="submit" class="btn btn-primary bg-gradient">Subscribe</button>
                             </div>
+                            </form>
                         </div>
                     </div>
                 </div>

@@ -28,7 +28,7 @@ def cart(request):
 
 
 def add_to_cart(request, slug):
-    product = Product.objects.get(slug=slug)
+    product = get_object_or_404(Product, slug=slug)
     quantity = int(request.GET.get('quantity', 1))
     
     if not request.session.session_key:
@@ -47,6 +47,10 @@ def add_to_cart(request, slug):
         item.quantity += quantity
         item.save()
         
+    return redirect('cart')
+
+def remove_from_cart(request, item_id):
+    CartItem.objects.filter(id=item_id).delete()
     return redirect('cart')
 
 def checkout(request):
@@ -148,14 +152,14 @@ def shop_single(request, slug):
         'rating_stats': rating_stats,
         'five_star': five_star,
         'four_star': four_star,
-        'thee_star': three_star,
+        'three_star': three_star,
         'two_star': two_star,
         'one_star': one_star,
         'five_star_pct': five_star_pct,
-        'four_start_pct': four_star_pct,
+        'four_star_pct': four_star_pct,
         'three_star_pct': three_star_pct,
         'two_star_pct': two_star_pct,
-        'one_start_pct': one_star_pct
+        'one_star_pct': one_star_pct
         
     }
     
@@ -165,13 +169,11 @@ def shop_single(request, slug):
 
 def shop(request):
     category = Category.objects.all()
+    products = Product.objects.all()
     
     category_id = request.GET.get('category')
     if category_id:
         products = products.filter(category_id=category_id)
-    
-    else:
-        products = Product.objects.all()
     
     context = {
         'products': products,
@@ -183,14 +185,20 @@ def shop(request):
 
 
 def wishlist(request):
-    wishlist = Wishlist.objects.all()
+    if not request.user.is_authenticated:
+        return redirect('login')
+    
+    wishlist = Wishlist.objects.filter(user=request.user)
     context = {
-        'wishlist': wishlist,
+        'wishlist': wishlist
     }
     return render(request, 'shop/wishlist.html', context=context)
 
 
 def add_to_wishlist(request, product_id):
+    if not request.user.is_authenticated:
+        return redirect('login')
+    
     product = get_object_or_404(Product, id=product_id)
     
     Wishlist.objects.get_or_create(
@@ -198,4 +206,4 @@ def add_to_wishlist(request, product_id):
         product=product
     )
     
-    return redirect(request.META.get('HTTP_REFERER'))
+    return redirect(request.META.get('HTTP_REFERER', 'home'))

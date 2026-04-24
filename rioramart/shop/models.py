@@ -15,6 +15,7 @@ class Category(models.Model):
         return self.name
     
     class Meta:
+        verbose_name = 'category'
         verbose_name_plural = 'categories'
         ordering = ('sort', )
     
@@ -61,8 +62,12 @@ class CartItem(models.Model):
     quantity = models.PositiveIntegerField(default=1)
     
     def __str__(self):
-        return f'{self.product} ({self.quantity})'
-
+        return f'({self.product} {self.quantity})'
+    
+    class Meta:
+        verbose_name = 'Cart Item'
+        verbose_name_plural = 'Cart Items'
+        
 
 #Ordering table
 class Order(models.Model):
@@ -96,12 +101,7 @@ class Order(models.Model):
     shopping_zip_code = models.CharField(max_length=20, blank=True)
     shopping_country = models.CharField(max_length=100, blank=True)
     
-    #payment_method = models.CharField(max_length=30)
-    #total_price = models.DecimalField(max_digits=10, decimal_places=2)
-    #status = models.CharField(max_length=20, default="pending")
-    #updated_at = models.DateTimeField(auto_now=True)
-    #shipping_same_as_billing = models.BooleanField(default=True)
-    
+
     notes = models.TextField(blank=True)
     
     created_at = models.DateTimeField(auto_now_add=True)
@@ -110,6 +110,7 @@ class Order(models.Model):
         return f'{self.first_name}-{self.last_name}'
     
     class Meta:
+        verbose_name = 'order'
         verbose_name_plural = 'orders'
         ordering = ('-created_at', )
     
@@ -125,10 +126,17 @@ class Review(models.Model):
         return self.name
     
     class Meta:
-        verbose_name_plural = 'reviews'
+        verbose_name = 'Review'
+        verbose_name_plural = 'Reviews'
         ordering = ('created_at', )
         
 class Wishlist(models.Model):
     user = models.ForeignKey(CustomUser, on_delete=models.CASCADE )
     product = models.ForeignKey(Product, on_delete=models.CASCADE)
     created_at = models.DateTimeField(auto_now_add=True)
+    
+    
+    class Meta:
+        verbose_name = 'Wishlist'
+        verbose_name_plural = 'Wishlists'
+      
