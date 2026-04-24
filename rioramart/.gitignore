@@ -1,2 +1,32 @@
 # Created by venv; see https://docs.python.org/3/library/venv.html
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.db
+*.sqlite3
 
+# Virtual env
+venv/
+env/
+.venv/
+
+# Django stuff
+media/
+staticfiles/
+*.log
+
+# Environment variables
+.env
+
+# IDE
+.vscode/
+.idea/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# migrations backup (optional)
+*.bak
