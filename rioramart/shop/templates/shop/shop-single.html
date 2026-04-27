@@ -99,41 +99,6 @@
                 {{ product.description|truncatechars:120 }}
               </p>
             </div>
-            <div class="my-3 size-section">
-              <span class="font-weight-bold text-secondary">Size:</span>
-              <div class="size-custom-radios mt-2">
-                <div class="size-item">
-                  <input type="radio" id="size-s" name="size" value="s" checked="">
-                  <label for="size-s">
-                    <span>S</span>
-                  </label>
-                </div>
-                <div class="size-item">
-                  <input type="radio" id="size-m" name="size" value="m">
-                  <label for="size-m">
-                    <span>
-                      M
-                    </span>
-                  </label>
-                </div>
-                <div class="size-item">
-                  <input type="radio" id="size-l" name="size" value="l">
-                  <label for="size-l">
-                    <span>
-                      L
-                    </span>
-                  </label>
-                </div>
-                <div class="size-item">
-                  <input type="radio" id="size-xl" name="size" value="l">
-                  <label for="size-xl">
-                    <span>
-                      XL
-                    </span>
-                  </label>
-                </div>
-              </div>
-            </div>
             <div class="my-3 color-section">
               <span class="font-weight-bold text-secondary">Colors:</span>
               <div class="custom-radios mt-2">
@@ -169,7 +134,7 @@
                 <div class="qty-container">
                   <button class="qty-btn-minus count-decreament" type="button"><i class="fas fa-minus"></i></button>
                   <input type="number" name="qty" value="1" class="input-qty input-cornered">
-                  <button class="qty-btn-plus count-increament" type="button"><i class="fas fa-plus"></i></button>
+                  <button type="submit" class="qty-btn-plus count-increament" type="button"><i class="fas fa-plus"></i></button>
                 </div>
                 <div>
                   <a href="{% url 'add_to_cart' product.slug %}?quantity=1" class="btn btn-primary btn-block ms-3 py-2"><i class="fa fa-shopping-cart"></i>
