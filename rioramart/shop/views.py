@@ -29,7 +29,7 @@ def cart(request):
 
 def add_to_cart(request, slug):
     product = get_object_or_404(Product, slug=slug)
-    quantity = int(request.GET.get('quantity', 1))
+    quantity = int(request.POST.get('quantity', 1))
     
     if not request.session.session_key:
         request.session.create()

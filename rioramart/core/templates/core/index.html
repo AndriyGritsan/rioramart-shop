@@ -99,7 +99,7 @@
         <div class="owl-carousel category-slider">
             {% for category in categories %}
             <div class="item">
-                <a href="{% url 'shop' %}?category={{ category.id }}">
+                <a href="{% url 'shop' %}?category={{ category.slug }}">
                     <img src="{{ category.image.url }}" class="img-fluid" alt="eCommerce Template">
                     <div class="category-title d-flex justify-content-center align-items-center">
                         <p class="text-nowrap mt-2 fw-normal text-black">{{ category.name }}</p>
@@ -191,7 +191,12 @@
                         <span class="price">{{ product.price }}</span>
                         <span class="discount">-10%</span>
                     </div>
-                    <button class="btn btn-primary cart-btn">Add to Cart</button>
+                    <form method="POST" action="{% url 'add_to_cart' product.slug %}">
+                        {% csrf_token %}
+                        <button type="submit" class="btn btn-primary cart-btn">
+                            Add to Cart
+                        </button>
+                    </form>
                 </div>
                 {% endfor %}
             </div>
@@ -254,7 +259,12 @@
                     <span class="discount">-{{ product.old_price|floatformat:0|add:"-product.price"|floatformat:0 }}</span>
                 {% endif %}
             </div>
-            <button class="btn btn-primary cart-btn">Add to Cart</button>
+            <form method="POST" action="{% url 'add_to_cart' product.slug %}" >
+                {% csrf_token %}
+                <button type="submit" class="btn btn-primary cart-btn">
+                    Add to Cart
+                </button>
+            </form>
         </div>
         {% endfor %}
     </div>
@@ -287,7 +297,7 @@
                                 <a href="{% url 'blog_single' blog.slug %}" class="text-inherit">{{ blog.title }}</a>
                             </div>
                             <div class="blog-desc my-2">
-                                <p class="text-inherit">{{ blog.content|truncatewords:20 }}</p>
+                                <p class="text-inherit">{{ blog.content|striptags|truncatewords:20 }}</p>
                             </div>
                             <div class="text-muted mt-2">
                                 <a href="{% url 'blog_single' blog.slug %}" class="read-more">Read More</a>
