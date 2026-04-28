@@ -17,6 +17,10 @@ class RegisterUserView(CreateView):
 class LoginUserView(LoginView):
     template_name = 'accounts/login.html'
     form_class = LoginForm
+    def dispatch(self, request, *args, **kwargs):
+        if request.user.is_authenticated:
+            return redirect('account')
+        return super().dispatch(request, *args, **kwargs)
     def get_success_url(self):
         return self.request.GET.get('next', '/')
     

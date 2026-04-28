@@ -201,9 +201,11 @@ def add_to_wishlist(request, product_id):
     
     product = get_object_or_404(Product, id=product_id)
     
-    Wishlist.objects.get_or_create(
-        user=request.user,
-        product=product
-    )
+    item = Wishlist.objects.filter(user=request.user, product=product)
+    
+    if item.exists():
+        item.delete()
+    else:
+        Wishlist.objects.create(user=request.user, product=product)
     
     return redirect(request.META.get('HTTP_REFERER', 'home'))

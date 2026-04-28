@@ -252,9 +252,11 @@
                                             <span class="old-price">{{ product.old_price }}</span>
                                         {% endif %}
                                         <span class="price">{{ product.price }}</span>
-                                        <span class="discount">-10%</span>
                                     </div>
-                                    <button class="btn btn-primary cart-btn">Add to Cart</button>
+                                    <form method="POST" action="{% url 'add_to_cart' product.slug %}">
+                                        {% csrf_token %}
+                                        <button class="btn btn-primary cart-btn">Add to Cart</button>
+                                    </form>
                                     </div>
                                 </div>
                                 {% endfor %}

@@ -147,7 +147,7 @@
               </div>
             </div>
             <div class="my-3 border-bottom pb-3">
-              <a href="#" class="text-decoration-none"><i class="far fa-heart me-2"></i>Add to wishlist</a>
+              <a href="{% url 'add_to_wishlist' product.id %}" class="text-decoration-none"><i class="far fa-heart me-2"></i>Add to wishlist</a>
             </div>
             <div class="my-3 d-flex align-items-center">
               <span class="font-weight-bold text-secondary">Available:</span>
@@ -299,7 +299,10 @@
             <span class="price">{{ product.price }}</span>
             <span class="discount">-10%</span>
           </div>
-           <button class="btn btn-primary cart-btn">Add to Cart</button>
+          <form method="POST" action="{% url 'add_to_cart' product.slug %}" >
+            {% csrf_token %}
+            <button class="btn btn-primary cart-btn">Add to Cart</button>
+          </form>
         </div>
       </div>
       {% endfor %}

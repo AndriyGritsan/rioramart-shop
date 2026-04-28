@@ -78,10 +78,3 @@ class OrderForm(forms.ModelForm):
         }
         
         
-#def __init__(self, *args, **kwargs):
-            #super().__init__(*args, **kwargs)
-
-#self.fields['shopping_country'].choices = COUNTRIES
-#self.fields['country'].choices = COUNTRIES
-#'country': forms.Select(attrs={'class': 'input-item gs_input_area'}),
-#'shopping_country': forms.Select(attrs={'class': 'input-item gs_input_area w-100'}),

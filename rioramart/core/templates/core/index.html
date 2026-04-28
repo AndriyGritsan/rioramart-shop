@@ -144,9 +144,10 @@
                                     <span class="old-price">{{ product.old_price }}</span>
                                 {% endif %}
                                 <span class="price">{{ product.price }}</span>
-                                <span class="discount">5%</span>
                             </div>
-                            <button class="btn btn-primary w-100 my-3">Add to cart</button>
+                            <form method="POST" action="{% url 'add_to_cart' product.slug %}" >
+                                <button type="submit" class="btn btn-primary w-100 my-3">Add to cart</button>
+                            </form>
                             <p class="mt-2 small text-muted">Availability: {{ product.stock }} In Stock</p>
 
                             <!-- Countdown -->
@@ -189,7 +190,6 @@
                             <span class="old-price">{{ product.old_price }}</span>
                         {% endif %}
                         <span class="price">{{ product.price }}</span>
-                        <span class="discount">-10%</span>
                     </div>
                     <form method="POST" action="{% url 'add_to_cart' product.slug %}">
                         {% csrf_token %}
