@@ -5,7 +5,7 @@ from django.contrib.auth.views import LoginView
 from django.contrib.auth import logout
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import views as auth_views
-
+from django.conf import settings
 
 # Create your views here.
 class RegisterUserView(CreateView):
@@ -17,12 +17,14 @@ class RegisterUserView(CreateView):
 class LoginUserView(LoginView):
     template_name = 'accounts/login.html'
     form_class = LoginForm
-    def dispatch(self, request, *args, **kwargs):
+    
+    def get(self, request, *args, **kwargs):
         if request.user.is_authenticated:
             return redirect('account')
-        return super().dispatch(request, *args, **kwargs)
+        return super().get(request, *args, **kwargs)
+    
     def get_success_url(self):
-        return self.request.GET.get('next', '/')
+        return self.request.GET.get('next') or settings.LOGIN_REDIRECT_URL
     
     
 def user_logout(request):
