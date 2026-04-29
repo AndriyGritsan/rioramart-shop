@@ -6,7 +6,7 @@
 <!-- breadcrumbs -->
 <nav class="container mt-4 mt-sm-4 mt-md-4 mt-lg-3 d-flex flex-wrap align-items-center gap-2 px-3">
   <div class="d-flex align-items-center gap-2">
-    <a href="{% url 'shop' %}">
+    <a href="{% url 'core:shop' %}">
       <svg class="text-primary" stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 576 512"
         height="20px" width="20px" xmlns="http://www.w3.org/2000/svg">
         <path
@@ -137,17 +137,17 @@
                   <button type="submit" class="qty-btn-plus count-increament" type="button"><i class="fas fa-plus"></i></button>
                 </div>
                 <div>
-                  <a href="{% url 'add_to_cart' product.slug %}?quantity=1" class="btn btn-primary btn-block ms-3 py-2"><i class="fa fa-shopping-cart"></i>
+                  <a href="{% url 'shop:add_to_cart' product.slug %}?quantity=1" class="btn btn-primary btn-block ms-3 py-2"><i class="fa fa-shopping-cart"></i>
                     <span class="d-none d-md-inline-block d-lg-inline-block">Add to cart</span></a>
                 </div>
                 <div>
-                  <a href="{% url 'checkout' %}" class="btn btn-danger btn-block ms-3 py-2"><i class="fa-solid fa-fire"></i>
+                  <a href="{% url 'shop:checkout' %}" class="btn btn-danger btn-block ms-3 py-2"><i class="fa-solid fa-fire"></i>
                     Buy Now</a>
                 </div>
               </div>
             </div>
             <div class="my-3 border-bottom pb-3">
-              <a href="{% url 'add_to_wishlist' product.id %}" class="text-decoration-none"><i class="far fa-heart me-2"></i>Add to wishlist</a>
+              <a href="{% url 'shop:add_to_wishlist' product.id %}" class="text-decoration-none"><i class="far fa-heart me-2"></i>Add to wishlist</a>
             </div>
             <div class="my-3 d-flex align-items-center">
               <span class="font-weight-bold text-secondary">Available:</span>
@@ -279,10 +279,10 @@
             <span class="badge-new bg-danger">Out of stock</span>
             {% endif %}
           <span class="wishlist-icon"><i class="fas fa-heart"></i></span>
-          <a href="{% url 'shop_single' product.slug %}">
+          <a href="{% url 'shop:shop_single' product.slug %}">
               <img src="{{ product.photo.url }}" class="img-fluid mb-2 product-img" alt="product">
           </a>
-          <h6><a href="{% url 'shop_single' product.slug %}">{{ product.name }}</a></h6>
+          <h6><a href="{% url 'shop:shop_single' product.slug %}">{{ product.name }}</a></h6>
           <div class="rating">
             <span class="d-flex align-items-center">
                 <span class="star-icon text-warning">★</span>
@@ -299,7 +299,7 @@
             <span class="price">{{ product.price }}</span>
             <span class="discount">-10%</span>
           </div>
-          <form method="POST" action="{% url 'add_to_cart' product.slug %}" >
+          <form method="POST" action="{% url 'shop:add_to_cart' product.slug %}" >
             {% csrf_token %}
             <button class="btn btn-primary cart-btn">Add to Cart</button>
           </form>

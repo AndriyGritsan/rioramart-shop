@@ -1,7 +1,7 @@
 from django.urls import path
 from .views import RegisterUserView, LoginUserView, user_logout, account, PasswordResetView
 
-
+app_name = 'accounts'
 
 urlpatterns = [
     path('register/', RegisterUserView.as_view(), name='register'),
@@ -12,3 +12,4 @@ urlpatterns = [
     #password recovery
     path('password_reset/', PasswordResetView.as_view(), name='password_reset')
 ]
+

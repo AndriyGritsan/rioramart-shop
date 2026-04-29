@@ -16,7 +16,7 @@
                     <div class="col-12 col-md-6 col-lg-12">
                         <div class="footer_newsletter pe-lg-5">
                             <h4 class="text-uppercase">Newsletter</h4>
-                            <form  method="post" action="{% url 'subscribe' %}" >
+                            <form  method="post" action="{% url 'core:subscribe' %}" >
                                 {% csrf_token %}
                             <div class="input-group">
                                 {{ subscription_form.email }}
@@ -33,10 +33,10 @@
                         <div class="footer_menu">
                             <h4 class="footer_title">My Account</h4>
                             <ul class="m-0 p-0 list-unstyled">
-                                <li><a href="{% url 'cart' %}">Cart</a></li>
-                                <li><a href="{% url 'wishlist' %}">Wishlist</a></li>
-                                <li><a href="{% url 'checkout' %}">Checkout</a></li>
-                                <li><a href="{% url 'shop' %}">Shop</a></li>
+                                <li><a href="{% url 'shop:cart' %}">Cart</a></li>
+                                <li><a href="{% url 'shop:wishlist' %}">Wishlist</a></li>
+                                <li><a href="{% url 'shop:checkout' %}">Checkout</a></li>
+                                <li><a href="{% url 'shop:shop' %}">Shop</a></li>
                             </ul>
 
                         </div>
@@ -45,10 +45,10 @@
                         <div class="footer_menu">
                             <h4 class="footer_title">Information</h4>
                             <ul class="m-0 p-0 list-unstyled">
-                                <li><a href="{% url 'about' %}">About Us</a></li>
-                                <li><a href="{% url 'shop' %}">Return Policy</a></li>
-                                <li><a href="{% url 'shop' %}">Privacy Policy</a></li>
-                                <li><a href="{% url 'contact' %}">Contact</a></li>
+                                <li><a href="{% url 'core:about' %}">About Us</a></li>
+                                <li><a href="{% url 'shop:shop' %}">Return Policy</a></li>
+                                <li><a href="{% url 'shop:shop' %}">Privacy Policy</a></li>
+                                <li><a href="{% url 'core:contact' %}">Contact</a></li>
                             </ul>
                         </div>
                     </div>

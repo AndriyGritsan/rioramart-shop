@@ -22,7 +22,7 @@
                         <a class="nav-link" href="?page=orders" data-page="orders"><i class="fas fa-shopping-bag"></i> Orders</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{% url 'wishlist' %}" data-page="wishlist"><i class="fas fa-heart"></i> Wishlist</a>
+                        <a class="nav-link" href="{% url 'shop:wishlist' %}" data-page="wishlist"><i class="fas fa-heart"></i> Wishlist</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#" data-page="addresses"><i class="fas fa-map-marker-alt"></i> Addresses</a>
@@ -31,13 +31,13 @@
                         <a class="nav-link" href="?page=profile" data-page="profile"><i class="fas fa-user"></i> Profile Details</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{% url 'cart' %}" data-page="payments"><i class="fas fa-credit-card"></i> Payment Methods</a>
+                        <a class="nav-link" href="{% url 'shop:cart' %}" data-page="payments"><i class="fas fa-credit-card"></i> Payment Methods</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#" data-page="notifications"><i class="fas fa-bell"></i> Notifications</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{% url 'Logout' %}"><i class="fas fa-sign-out-alt"></i> Logout</a>
+                        <a class="nav-link" href="{% url 'account:logout' %}"><i class="fas fa-sign-out-alt"></i> Logout</a>
                     </li>
                 </ul>
             </div>

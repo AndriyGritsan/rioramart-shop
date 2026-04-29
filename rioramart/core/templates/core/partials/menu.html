@@ -9,7 +9,7 @@
 
                         {% for category in menu_categories %}
                         <li>
-                            <a href="{% url 'shop' %}?category={{ category.slug }}" class="more-menu">{{ category.name }}</a>
+                            <a href="{% url 'shop:shop' %}?category={{ category.slug }}" class="more-menu">{{ category.name }}</a>
                         </li>
                         {% endfor %}
                     </ul>

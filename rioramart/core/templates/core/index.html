@@ -99,7 +99,7 @@
         <div class="owl-carousel category-slider">
             {% for category in categories %}
             <div class="item">
-                <a href="{% url 'shop' %}?category={{ category.slug }}">
+                <a href="{% url 'shop:shop' %}?category={{ category.slug }}">
                     <img src="{{ category.image.url }}" class="img-fluid" alt="eCommerce Template">
                     <div class="category-title d-flex justify-content-center align-items-center">
                         <p class="text-nowrap mt-2 fw-normal text-black">{{ category.name }}</p>
@@ -172,10 +172,10 @@
                 <!-- Product Item -->
                 <div class="product-card">
                     <span class="wishlist-icon"><i class="fas fa-heart"></i></span>
-                    <a href="{% url 'shop_single' product.slug %}">
+                    <a href="{% url 'shop:shop_single' product.slug %}">
                         <img src="{{ product.photo.url }}" class="img-fluid mb-2 product-img" alt="product">
                     </a>
-                    <h6><a href="{% url 'shop_single' product.slug %}">{{ product.name }}</a></h6>
+                    <h6><a href="{% url 'shop:shop_single' product.slug %}">{{ product.name }}</a></h6>
                     <div class="rating">
                         <span class="d-flex align-items-center">
                             <span class="star-icon text-warning">★</span>
@@ -191,7 +191,7 @@
                         {% endif %}
                         <span class="price">{{ product.price }}</span>
                     </div>
-                    <form method="POST" action="{% url 'add_to_cart' product.slug %}">
+                    <form method="POST" action="{% url 'shop:add_to_cart' product.slug %}">
                         {% csrf_token %}
                         <button type="submit" class="btn btn-primary cart-btn">
                             Add to Cart
@@ -237,10 +237,10 @@
                 <span class="badge-new bg-danger">Out of stock</span>
             {% endif %}
             <span class="wishlist-icon"><i class="fas fa-heart"></i></span>
-            <a href="{% url 'shop_single' product.slug %}">
+            <a href="{% url 'shop:shop_single' product.slug %}">
                 <img src="{{ product.photo.url }}" class="img-fluid mb-2 product-img" alt="product">
             </a>
-            <h6><a href="{% url 'shop_single' product.slug %}">{{ product.name }}</a></h6>
+            <h6><a href="{% url 'shop:shop_single' product.slug %}">{{ product.name }}</a></h6>
             <div class="rating">
                 <span class="d-flex align-items-center">
                     <span class="star-icon text-warning">★</span>
@@ -259,7 +259,7 @@
                     <span class="discount">-{{ product.old_price|floatformat:0|add:"-product.price"|floatformat:0 }}</span>
                 {% endif %}
             </div>
-            <form method="POST" action="{% url 'add_to_cart' product.slug %}" >
+            <form method="POST" action="{% url 'shop:add_to_cart' product.slug %}" >
                 {% csrf_token %}
                 <button type="submit" class="btn btn-primary cart-btn">
                     Add to Cart
@@ -282,7 +282,7 @@
             <div class="blog-item p-1">
                 <div class="blog-wraper">
                     <div class="blog-header">
-                        <a href="{% url 'blog_single' blog.slug %}">
+                        <a href="{% url 'blog:blog_single' blog.slug %}">
                             <div class="img-zoom">
                                 <img src="{{ blog.image.url }}" alt="eCommerce Html Template"
                                     class="img-fluid w-100">
@@ -294,13 +294,13 @@
                         </div>
                         <div>
                             <div class="h5 blog-title mt-3">
-                                <a href="{% url 'blog_single' blog.slug %}" class="text-inherit">{{ blog.title }}</a>
+                                <a href="{% url 'blog:blog_single' blog.slug %}" class="text-inherit">{{ blog.title }}</a>
                             </div>
                             <div class="blog-desc my-2">
                                 <p class="text-inherit">{{ blog.content|striptags|truncatewords:20 }}</p>
                             </div>
                             <div class="text-muted mt-2">
-                                <a href="{% url 'blog_single' blog.slug %}" class="read-more">Read More</a>
+                                <a href="{% url 'blog:blog_single' blog.slug %}" class="read-more">Read More</a>
                             </div>
                         </div>
                     </div>

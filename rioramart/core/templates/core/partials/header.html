@@ -7,9 +7,9 @@
             <div class="row">
                 <div class="col-12 col-sm-12 col-md-12 col-lg-6 d-none d-sm-none p-0 d-md-none d-lg-block">
                     <ul class="list-unstyled m-0 d-flex p-0 top-header-menu">
-                        <li><a href="{% url 'home' %}">Home</a></li>
-                        <li><a href="{% url 'about' %}">About Us</a></li>
-                        <li><a href="{% url 'contact' %}">Contact Us</a></li>
+                        <li><a href="{% url 'core:home' %}">Home</a></li>
+                        <li><a href="{% url 'core:about' %}">About Us</a></li>
+                        <li><a href="{% url 'core:contact' %}">Contact Us</a></li>
                     </ul>
                 </div>
                 <div
@@ -54,7 +54,7 @@
                     </button>
                 </div>
                 <div class="col-8 col-sm-8 col-md-8 col-lg-3 order-1 order-lg-1 d-flex justify-content-start">
-                    <a href="{% url 'home' %}">
+                    <a href="{% url 'url:home' %}">
                         <img src="{% static 'assets/images/logo.png' %}" alt="logo" width="180" height="auto" sizes="(max-width: 360px) 50vw, 180px">
                     </a>
                 </div>
@@ -90,7 +90,7 @@
                     <div>
                         <div class="list-inline  d-flex mt-2">
                             <div class="list-inline-item d-none d-lg-block">
-                                <a href="{% url 'login' %}" class="text-muted">
+                                <a href="{% url 'accounts:login' %}" class="text-muted">
                                     <svg xmlns="http://www.w3.org/2000/svg" class="icon-account" width="25" height="25"
                                         viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
                                         stroke-linecap="round" stroke-linejoin="round">
@@ -100,7 +100,7 @@
                                 </a>
                             </div>
                             <div class="list-inline-item d-none d-lg-block">
-                                <a href="{% url 'wishlist' %}" class="text-muted position-relative">
+                                <a href="{% url 'shop:wishlist' %}" class="text-muted position-relative">
                                     <svg xmlns="http://www.w3.org/2000/svg" class="icon-wishlist" width="25" height="25"
                                         viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
                                         stroke-linecap="round" stroke-linejoin="round">
@@ -171,7 +171,7 @@
                                 </div>
                             </div>
                             <div class="list-inline-item me-3 me-lg-0">
-                                <a class="text-muted position-relative" href="{% url 'cart' %}">
+                                <a class="text-muted position-relative" href="{% url 'shop:cart' %}">
                                     <svg xmlns="http://www.w3.org/2000/svg" class="icon-cart" width="25" height="25"
                                         viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
                                         stroke-linecap="round" stroke-linejoin="round">
@@ -200,7 +200,7 @@
                 <div class="offcanvas offcanvas-start" tabindex="-1" id="navbar-default"
                     aria-labelledby="navbar-defaultLabel">
                     <div class="offcanvas-header">
-                        <a href="{% url 'login' %}" class="text-muted">
+                        <a href="{% url 'accounts:login' %}" class="text-muted">
                             <svg xmlns="http://www.w3.org/2000/svg" class="icon-account" width="25" height="25"
                                 viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
                                 stroke-linecap="round" stroke-linejoin="round">
@@ -230,7 +230,7 @@
                                 <div class="card card-body">
                                     <ul class="mb-0 list-unstyled">
                                         {% for category in menu_categories %}
-                                        <li><a class="dropdown-item" href="{% url 'shop' %}?category={{ category.slug }}">{{ category.name }}</a></li>
+                                        <li><a class="dropdown-item" href="{% url 'shop:shop' %}?category={{ category.slug }}">{{ category.name }}</a></li>
                                         {% endfor %}
                                     </ul>
                                 </div>
@@ -267,7 +267,7 @@
                                     <ul class="dropdown-menu p-0 m-0 custom-dropdown"
                                         aria-labelledby="dropdownMenuButton1">
                                         {% for category in menu_categories %}
-                                        <li><a class="dropdown-item" href="{% url 'shop' %}?category={{ category.slug }}">{{ category.name }}</a></li>
+                                        <li><a class="dropdown-item" href="{% url 'shop:shop' %}?category={{ category.slug }}">{{ category.name }}</a></li>
                                         {% endfor %}
                                     </ul>
                                 </div>
@@ -276,16 +276,16 @@
                                 <div class="menu-item-list">
                                     <ul class="navbar-nav align-items-start align-items-lg-center  py-0">
                                         <li class="nav-item dropdown me-0 me-lg-2">
-                                            <a class="nav-link " href="{% url 'home' %}">Home</a>
+                                            <a class="nav-link " href="{% url 'core:home' %}">Home</a>
                                         </li>
                                         <li class="nav-item dropdown  me-0 me-lg-2">
-                                            <a class="nav-link text-nowrap" href="{% url 'shop' %}?deal=1">Today Deals</a>
+                                            <a class="nav-link text-nowrap" href="{% url 'shop:shop' %}?deal=1">Today Deals</a>
                                         </li>
                                         <li class="nav-item dropdown me-0 me-lg-2">
-                                            <a class="nav-link text-nowrap" href="{% url 'shop' %}?sale=summer">Summer Seal</a>
+                                            <a class="nav-link text-nowrap" href="{% url 'shop:shop' %}?sale=summer">Summer Seal</a>
                                         </li>
                                         <li class="nav-item dropdown me-0 me-lg-2">
-                                            <a class="nav-link text-nowrap" href="{% url 'shop' %}">Shop</a>
+                                            <a class="nav-link text-nowrap" href="{% url 'shop:shop' %}">Shop</a>
                                         </li>
                                         <li class="nav-item dropdown dropdown-fullwidth me-0 me-lg-2">
                                             <a class="nav-link dropdown-toggle text-nowrap" href="#" role="button"
@@ -295,7 +295,7 @@
                                                     {% for category in menu_categories %}
                                                     <div class="col-lg-3 col-12 mb-4 mb-lg-0">
                                                         <h6 class="text-primary ps-3">{{ category.name }}</h6>
-                                                        <a class="dropdown-item" href="{% url 'shop' %}?category={{ category.slug }}">View all
+                                                        <a class="dropdown-item" href="{% url 'shop:shop' %}?category={{ category.slug }}">View all
                                                         </a>
                                                     </div>
                                                     {% endfor %}
@@ -309,29 +309,29 @@
                                                 <div class="row p-2 p-lg-4">
                                                     <div class="col-lg-3 col-12 mb-4 mb-lg-0">
                                                         <h6 class="text-primary ps-3">Shop</h6>
-                                                        <a class="dropdown-item" href="{% url 'shop' %}">Shop Page - Filter</a>
-                                                        <a class="dropdown-item" href="{% url 'shop' %}">Shop Single</a>
-                                                        <a class="dropdown-item" href="{% url 'wishlist' %}">Shop Wishlist</a>
-                                                        <a class="dropdown-item" href="{% url 'cart' %}">Shop Cart</a>
-                                                        <a class="dropdown-item" href="{% url 'checkout' %}">Shop Checkout</a>
+                                                        <a class="dropdown-item" href="{% url 'shop:shop' %}">Shop Page - Filter</a>
+                                                        <a class="dropdown-item" href="{% url 'shop:shop' %}">Shop Single</a>
+                                                        <a class="dropdown-item" href="{% url 'shop:wishlist' %}">Shop Wishlist</a>
+                                                        <a class="dropdown-item" href="{% url 'shop:cart' %}">Shop Cart</a>
+                                                        <a class="dropdown-item" href="{% url 'shop:checkout' %}">Shop Checkout</a>
                                                     </div>
                                                     <div class="col-lg-3 col-12 mb-4 mb-lg-0">
                                                         <h6 class="text-primary ps-3">Account</h6>
-                                                        <a class="dropdown-item" href="{% url 'login' %}">Sign in</a>
-                                                        <a class="dropdown-item" href="{% url 'register' %}">Signup</a>
-                                                        <a class="dropdown-item" href="{% url 'password_reset' %}">Forgot
+                                                        <a class="dropdown-item" href="{% url 'accounts:login' %}">Sign in</a>
+                                                        <a class="dropdown-item" href="{% url 'accounts:register' %}">Signup</a>
+                                                        <a class="dropdown-item" href="{% url 'accounts:password_reset' %}">Forgot
                                                             Password</a>
-                                                        <a class="dropdown-item" href="{% url 'account' %}">My Account</a>
+                                                        <a class="dropdown-item" href="{% url 'accounts:account' %}">My Account</a>
                                                     </div>
                                                     <div class="col-lg-3 col-12 mb-4 mb-lg-0">
                                                         <h6 class="text-primary ps-3">Blog</h6>
-                                                        <a class="dropdown-item" href="{% url 'blog' %}">Blog</a>
-                                                        <a class="dropdown-item" href="{% url 'blog' %}">Blog Single</a>
+                                                        <a class="dropdown-item" href="{% url 'blog:blog' %}">Blog</a>
+                                                        <a class="dropdown-item" href="{% url 'blog:blog' %}">Blog Single</a>
                                                     </div>
                                                     <div class="col-lg-3 col-12 mb-4 mb-lg-0">
                                                         <h6 class="text-primary ps-3">Other</h6>
-                                                        <a class="dropdown-item" href="{% url 'about' %}">About us</a>
-                                                        <a class="dropdown-item" href="{% url 'contact' %}">Contact</a>
+                                                        <a class="dropdown-item" href="{% url 'core:about' %}">About us</a>
+                                                        <a class="dropdown-item" href="{% url 'core:contact' %}">Contact</a>
                                                     </div>
                                                 </div>
                                             </div>
