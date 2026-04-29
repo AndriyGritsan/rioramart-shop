@@ -33,7 +33,7 @@ DB_PORT = os.getenv('DB_PORT')
 DB_PASSWORD = os.getenv('DB_PASSWORD')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True if os.getenv('DEBUG') == 'True' else False
+DEBUG = os.getenv.get('DEBUG', 'False') == True
 
 ALLOWED_HOSTS = [os.getenv('ALLOWED_HOSTS')]
 
