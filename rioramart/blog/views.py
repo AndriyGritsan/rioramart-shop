@@ -23,7 +23,7 @@ def blog_single(request, slug):
             comment = form.save(commit=False)
             comment.post = post
             comment.save()
-            return redirect('blog_single', slug=post.slug)
+            return redirect('blog:blog_single', slug=post.slug)
     
     else:
         form = CommentForm()

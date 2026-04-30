@@ -47,11 +47,11 @@ def add_to_cart(request, slug):
         item.quantity += quantity
         item.save()
         
-    return redirect('cart')
+    return redirect('shop:cart')
 
 def remove_from_cart(request, item_id):
     CartItem.objects.filter(id=item_id).delete()
-    return redirect('cart')
+    return redirect('shop:cart')
 
 def checkout(request):
     cart = Cart.objects.filter(session_key=request.session.session_key).first()
@@ -90,7 +90,7 @@ def checkout(request):
             if cart:
                 cart.items.all().delete()
 
-            return redirect('home')
+            return redirect('core:home')
 
     context = {
         'cart_items': cart_items,
@@ -102,6 +102,14 @@ def checkout(request):
             
     return render(request, 'shop/checkout.html', context=context)
 
+
+def delete_order(request, order_id):
+    order = get_object_or_404(Order, id=order_id, user=request.user)
+    
+    if request.method == "POST":
+        order.delete()
+        
+    return redirect('accounts:account')
 
 
 def shop_single(request, slug):
@@ -171,9 +179,9 @@ def shop(request):
     category = Category.objects.all()
     products = Product.objects.all()
     
-    category_id = request.GET.get('category')
-    if category_id:
-        products = products.filter(category_id=category_id)
+    category_slug = request.GET.get('category')
+    if category_slug:
+        products = products.filter(category__slug=category_slug)
     
     context = {
         'products': products,
@@ -208,4 +216,4 @@ def add_to_wishlist(request, product_id):
     else:
         Wishlist.objects.create(user=request.user, product=product)
     
-    return redirect(request.META.get('HTTP_REFERER', 'home'))
+    return redirect(request.META.get('HTTP_REFERER', 'core:home'))

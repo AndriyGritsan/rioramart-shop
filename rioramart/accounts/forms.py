@@ -1,6 +1,6 @@
 from django import forms             
-from django.contrib.auth import get_user_model
-from django.contrib.auth import authenticate
+from django.contrib.auth import get_user_model, authenticate
+from django.contrib.auth.models import User
 
 
 User = get_user_model()
@@ -95,3 +95,13 @@ class PasswordResetForm(forms.Form):
         widget=forms.EmailInput(attrs={'class': 'form-control py-2',
                                        'placeholder': 'Email' })
     )
+    
+class ProfileForm(forms.ModelForm):
+    class Meta:
+        model = User
+        fields = ('first_name', 'last_name', 'email')
+        widgets = {
+            'first_name': forms.TextInput(attrs={'class': 'form-control'}),
+            'last_name': forms.TextInput(attrs={'class': 'form-control'}),
+            'email': forms.EmailInput(attrs={'class': 'form-control'})
+        }

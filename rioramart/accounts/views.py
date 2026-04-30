@@ -1,10 +1,12 @@
 from django.shortcuts import render, redirect
 from django.views.generic import CreateView
-from .forms import RegisterForm, PasswordResetForm, LoginForm
+from .forms import RegisterForm, PasswordResetForm, LoginForm, ProfileForm
 from django.contrib.auth.views import LoginView
-from django.contrib.auth import logout
+from django.contrib.auth import logout, update_session_auth_hash
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import views as auth_views
+from shop.models import Order, Wishlist
+from django.contrib.auth.forms import PasswordChangeForm
 
 
 # Create your views here.
@@ -23,12 +25,48 @@ class LoginUserView(LoginView):
     
 def user_logout(request):
     logout(request)
-    return redirect('home')
+    return redirect('/')
 
 
 @login_required
 def account(request):
-    return render(request, 'accounts/account.html')
+    page = request.GET.get('page', 'dashboard')
+    
+    if request.method == "POST":
+        form = ProfileForm(request.POST, instance=request.user)
+        if form.is_valid():
+            form.save()
+    else:
+        form = ProfileForm(instance=request.user)
+        
+    if request.method == "POST":
+        pass_form = PasswordChangeForm(request.user, request.POST)
+        if pass_form.is_valid():
+            user = pass_form.save()
+            update_session_auth_hash(request, user)
+    else:
+        pass_form = PasswordChangeForm(request.user)
+    
+    
+    
+    order_count = Order.objects.filter(email=request.user.email).count()
+    wishlist_count = Wishlist.objects.filter(user=request.user).count()
+    recent_orders = Order.objects.filter(email=request.user.email).order_by('id')[:3]
+    wishlist_items = Wishlist.objects.filter(user=request.user).select_related('product')
+    addresses = Order.objects.filter(email=request.user.email).order_by('-id')
+    
+    context = {
+        'page': page,
+        'order_count': order_count,
+        'wishlist_count': wishlist_count,
+        'recent_orders': recent_orders,
+        'wishlist_items': wishlist_items,
+        'addresses': addresses,
+        'form': form,
+        'pass_form': pass_form
+    }
+    
+    return render(request, 'accounts/account.html', context=context)
 
 
 class PasswordResetView(auth_views.PasswordResetView):

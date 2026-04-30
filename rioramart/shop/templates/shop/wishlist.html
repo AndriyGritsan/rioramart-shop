@@ -2,23 +2,6 @@
 {% load static %}
 {% block content %}
 
-    <!-- breadcrumbs -->
-      <nav class="container mt-4 mt-sm-4 mt-md-4 mt-lg-3 d-flex flex-wrap align-items-center gap-2 px-3">
-        <div class="d-flex align-items-center gap-2">
-          <a href="{% url 'core:home' %}">
-            <svg class="text-primary" stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 576 512" height="20px" width="20px" xmlns="http://www.w3.org/2000/svg">
-              <path d="M280.37 148.26L96 300.11V464a16 16 0 0 0 16 16l112.06-.29a16 16 0 0 0 15.92-16V368a16 16 0 0 1 16-16h64a16 16 0 0 1 16 16v95.64a16 16 0 0 0 16 16.05L464 480a16 16 0 0 0 16-16V300L295.67 148.26a12.19 12.19 0 0 0-15.3 0zM571.6 251.47L488 182.56V44.05a12 12 0 0 0-12-12h-56a12 12 0 0 0-12 12v72.61L318.47 43a48 48 0 0 0-61 0L4.34 251.47a12 12 0 0 0-1.6 16.9l25.5 31A12 12 0 0 0 45.15 301l235.22-193.74a12.19 12.19 0 0 1 15.3 0L530.9 301a12 12 0 0 0 16.9-1.6l25.5-31a12 12 0 0 0-1.7-16.93z"></path>
-            </svg>
-          </a>
-          <svg stroke="currentColor" fill="none" stroke-width="2" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round" class="text-muted ml-2" height="18px" width="18px" xmlns="http://www.w3.org/2000/svg">
-            <polyline points="9 18 15 12 9 6"></polyline>
-          </svg>
-        </div>
-        <div class="d-flex align-items-center gap-2 ml-1">
-          <a class="text-muted text-decoration-none pointer-events-none" href="#">Wishlist</a>
-        </div>
-      </nav>
-    <!-- end breadcrumbs -->
     <section class="wishlist-section">
       <div class="container mt-50 px-4">
         <div class="row">
@@ -47,12 +30,13 @@
                         <span class="old-price">{{ item.product.old_price }}</span>
                     {% endif %}
                     <span class="price">{{ item.product.price }}</span>
-                    <span class="discount">-10%</span>
                 </div>
+                {% if product.slug %}
                 <form method="POST" action="{% url 'shop:add_to_cart' product.slug %}">
                   {% csrf_token %}
                   <button type="submit" class="btn btn-primary cart-btn">Add to Cart</button>
                 </form>
+                {% endif %}
             </div>
         </div>
           {% endif %}

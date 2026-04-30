@@ -71,6 +71,8 @@ class CartItem(models.Model):
 
 #Ordering table
 class Order(models.Model):
+    
+    
     #Billing
     first_name = models.CharField(max_length=100)
     last_name = models.CharField(max_length=100)
