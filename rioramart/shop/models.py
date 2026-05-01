@@ -115,7 +115,8 @@ class Order(models.Model):
         verbose_name = 'order'
         verbose_name_plural = 'orders'
         ordering = ('-created_at', )
-    
+  
+      
 #Table Reviews
 class Review(models.Model):
     product = models.ForeignKey('Product', on_delete=models.CASCADE, related_name='reviews')

@@ -54,6 +54,9 @@ def remove_from_cart(request, item_id):
     return redirect('shop:cart')
 
 def checkout(request):
+    if not request.session.session_key:
+        request.session.create()
+    
     cart = Cart.objects.filter(session_key=request.session.session_key).first()
 
     cart_items = []
@@ -63,7 +66,7 @@ def checkout(request):
         items = cart.items.select_related('product')
 
         for item in items:
-            price = float(item.product.price)
+            price = item.product.price
             quantity = item.quantity
             total_price = price * quantity
 
@@ -79,18 +82,22 @@ def checkout(request):
     delivery = 40
     total = subtotal + delivery
 
-    form = OrderForm()
+    form = OrderForm(request.POST or None)
 
-    if request.method == "POST":
-        form = OrderForm(request.POST)
+    if request.method == "POST" and form.is_valid():
+        order = form.save(commit=False)
 
-        if form.is_valid():
-            order = form.save()
-
-            if cart:
-                cart.items.all().delete()
-
-            return redirect('core:home')
+        if request.user.is_authenticated:
+            order.user = request.user
+            
+        order.save()
+            
+        if cart:
+            cart.items.all().delete()
+            cart.delete()
+                
+        return redirect('core:home')
+       
 
     context = {
         'cart_items': cart_items,
@@ -104,6 +111,9 @@ def checkout(request):
 
 
 def delete_order(request, order_id):
+    if not request.user.is_authenticated:
+        return redirect('accounts:login')
+    
     order = get_object_or_404(Order, id=order_id, user=request.user)
     
     if request.method == "POST":

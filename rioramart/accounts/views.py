@@ -32,14 +32,14 @@ def user_logout(request):
 def account(request):
     page = request.GET.get('page', 'dashboard')
     
-    if request.method == "POST":
+    if request.method == "POST" and "profile_submit" in request.POST:
         form = ProfileForm(request.POST, instance=request.user)
         if form.is_valid():
             form.save()
     else:
         form = ProfileForm(instance=request.user)
         
-    if request.method == "POST":
+    if request.method == "POST" and "password_submit" in request.POST:
         pass_form = PasswordChangeForm(request.user, request.POST)
         if pass_form.is_valid():
             user = pass_form.save()
