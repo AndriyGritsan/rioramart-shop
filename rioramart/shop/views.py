@@ -1,7 +1,8 @@
 from django.shortcuts import render, redirect, get_object_or_404
-from .models import Category, Product, Order, Review, Cart, CartItem, Wishlist
-from .forms import OrderForm
+from .models import Category, Product, Order, Review, Cart, CartItem, Wishlist, OrderItem
+from .forms import OrderForm, ReviewForm
 from django.db.models import Avg, Count
+from django.contrib.auth.decorators import login_required
 
 # Create your views here.
 def cart(request):
@@ -93,6 +94,21 @@ def checkout(request):
         order.save()
             
         if cart:
+            items = cart.items.select_related('product')
+            total_price = 0
+            
+            for item in items:
+                OrderItem.objects.create(
+                    order=order,
+                    product=item.product, 
+                    quantity=item.quantity,
+                    price=item.product.price
+                )
+                total_price += item.product.price * item.quantity
+        
+            order.total_price = total_price
+            order.save()
+        
             cart.items.all().delete()
             cart.delete()
                 
@@ -227,3 +243,36 @@ def add_to_wishlist(request, product_id):
         Wishlist.objects.create(user=request.user, product=product)
     
     return redirect(request.META.get('HTTP_REFERER', 'core:home'))
+
+@login_required
+def add_review(request, product_id):
+    product = get_object_or_404(Product, id=product_id)
+    
+    if request.method == 'POST':
+        form = ReviewForm(request.POST)
+        
+        if form.is_valid():
+            review = form.save(commit=False)
+            review.product = product
+            
+            review.rating = request.POST.get('rating')
+            
+            review.save()
+    
+    return redirect('shop_single', product_id=product_id)
+
+    #if request.method == 'POST':
+        #name = request.POST.get('name')
+        #text = request.POST.get('text')
+        #rating = request.POST.get('rating')
+        
+        #Review.objects.create(
+            #product=product, 
+            #name=name,
+            #text=text,
+            #rating=rating
+        #)
+        
+        #return redirect('shop_single', product_id=product.id)
+    
+    #return redirect('shop_single', product_id=product_id)

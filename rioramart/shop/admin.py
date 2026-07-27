@@ -67,9 +67,9 @@ class OrderAdmin(admin.ModelAdmin):
     
 @admin.register(Review)
 class ReviewAdmin(admin.ModelAdmin):
-    list_display = ('id', 'product', 'name', 'rating', 'created_at')
+    list_display = ('id', 'product', 'user', 'rating', 'created_at')
     list_filter = ('rating', 'created_at', 'product')
-    search_fields = ('name', 'text')
+    search_fields = ('user', 'text')
     ordering = ('rating', )
     
 

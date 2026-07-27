@@ -1,5 +1,5 @@
 from django import forms
-from .models import Order
+from .models import Order, Review
 
 class OrderForm(forms.ModelForm):
     
@@ -77,4 +77,11 @@ class OrderForm(forms.ModelForm):
                                         'placeholder': 'Notes about your order, e.g. Special notes for Delivery:'})
         }
         
+class ReviewForm(forms.ModelForm):
+    class Meta:
+        model = Review
+        fields = ('text', 'rating')
         
+        widgets = {
+            'text': forms.Textarea(attrs={'class': 'form-control', 'placeholder': 'Share your experience with this product'}),
+        }

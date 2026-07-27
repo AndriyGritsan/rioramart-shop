@@ -35,8 +35,12 @@ DB_PASSWORD = os.getenv('DB_PASSWORD')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.environ.get('DEBUG', 'False').lower() == 'true'
 
-ALLOWED_HOSTS = [os.getenv('ALLOWED_HOSTS')]
+#ALLOWED_HOSTS = [os.getenv('ALLOWED_HOSTS')]
 
+ALLOWED_HOSTS = os.getenv(
+    "ALLOWED_HOSTS",
+    "127.0.0.1,localhost"
+).split(",")
 
 # Application definition
 
