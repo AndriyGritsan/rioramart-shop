@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Category, Product, Cart, CartItem, Order, Review, Wishlist
+from .models import Category, Product, Cart, CartItem, Order, Review, Wishlist, OrderItem
 from django.utils.safestring import mark_safe
 # Register your models here.
 
@@ -72,9 +72,15 @@ class ReviewAdmin(admin.ModelAdmin):
     search_fields = ('user', 'text')
     ordering = ('rating', )
     
-
+@admin.register(Wishlist)
 class WishlistAdmin(admin.ModelAdmin):
     list_display = ('id', 'user', 'product', 'created_at')
     list_filter = ('created_at', )
     search_fields = ('user__email', 'product_name')
     ordering = ('-created_at', )
+    
+    
+@admin.registe(OrderItem)
+class OrderItemAdmin(admin.ModelAdmin):
+    list_display = ('id', 'order', 'product', 'quantity ', 'price')
+    list_filter = ('order', )
