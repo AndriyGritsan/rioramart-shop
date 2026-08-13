@@ -73,6 +73,13 @@ class CartItem(models.Model):
 
 #Ordering table
 class Order(models.Model):
+    #user
+    user = models.ForeignKey(
+        settings.AUTH_USER_MODEL, 
+        on_delete=models.CASCADE,
+        null=True,
+        blank=True
+    )
     #Billing
     first_name = models.CharField(max_length=100)
     last_name = models.CharField(max_length=100)
@@ -141,7 +148,7 @@ class Review(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     
     def __str__(self):
-        return self.name
+        return self.user.email
     
     class Meta:
         verbose_name = 'Review'

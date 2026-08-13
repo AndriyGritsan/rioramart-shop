@@ -142,13 +142,12 @@ def shop_single(request, slug):
     product = get_object_or_404(Product, slug=slug)
     
     if request.method == "POST":
-        name = request.POST.get('name')
         text = request.POST.get('text')
         rating = int(request.POST.get('rating') or 5)
         
         Review.objects.create(
             product=product,
-            name = name,
+            user=request.user,
             text = text,
             rating=rating
         )
@@ -261,18 +260,3 @@ def add_review(request, product_id):
     
     return redirect('shop_single', product_id=product_id)
 
-    #if request.method == 'POST':
-        #name = request.POST.get('name')
-        #text = request.POST.get('text')
-        #rating = request.POST.get('rating')
-        
-        #Review.objects.create(
-            #product=product, 
-            #name=name,
-            #text=text,
-            #rating=rating
-        #)
-        
-        #return redirect('shop_single', product_id=product.id)
-    
-    #return redirect('shop_single', product_id=product_id)
